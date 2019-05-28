@@ -5,11 +5,11 @@ Trabajo Final
 -------------
 
 ### Equipo de Trabajo
-* Ocho Erre Be
-* Vilaron la anaconda
-* TuPapiPro
+* Rodrigo Ramírez
+* Marcelo Martínez
+* Juan Carlos Hernández
 
-### Introduccion
+### Introducción
 ##### Motivacion : razon de la existencia del proyecto 
 ##### Problema : Claro p mascotsas
 ##### Solucion : Implementar estructura dataframe de panda
@@ -20,5 +20,20 @@ Trabajo Final
 ### Marco Conceptual
 definir arboles, dataframe
 ### Diagrama de clases (alto nivel)
+clase dataframe clase row clase column
 
 ### Cronograma de trabajo
+Hito 1:
+-Crear repositorio
+-Crear proyecto
+-Editar Informe
+  -Intro
+  -Objetivos
+  -Marco teorico
+  -Diagrama de clases
+  -Cronograma
+Hito 2:
+  -Implementacion de clases
+  -UI, data grid, cargar, exportar, filtros
+  -Designar dependencias
+  -
