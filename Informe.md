@@ -23,7 +23,7 @@ definir arboles, dataframe
 clase dataframe clase row clase column
 
 ### Cronograma de trabajo
-Hito 1:
+* Hito 1:
 -Crear repositorio
 -Crear proyecto
 -Editar Informe
@@ -32,7 +32,7 @@ Hito 1:
   -Marco teorico
   -Diagrama de clases
   -Cronograma
-Hito 2:
+* Hito 2:
   -Implementacion de clases
   -UI, data grid, cargar, exportar, filtros
   -Designar dependencias
