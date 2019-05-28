@@ -43,5 +43,8 @@ clase dataframe clase row clase column
   -TDA 2 PILA
   -Diagrama de componentes (se hace en clases)
   -Diagrama de clases de bajo nivel
+* notas:
  ES EN TERNO
+ VISIO O YUML.ME PARA DIAGRAMA DE CLASES
+ 
   
