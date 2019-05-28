@@ -36,4 +36,12 @@ clase dataframe clase row clase column
   -Implementacion de clases
   -UI, data grid, cargar, exportar, filtros
   -Designar dependencias
-  -
+* Hito 3:
+  -Interfaz
+  -diseño de tipos de datos abstractos (TDA)
+  -TDA 1 BIN TREE
+  -TDA 2 PILA
+  -Diagrama de componentes (se hace en clases)
+  -Diagrama de clases de bajo nivel
+ ES EN TERNO
+  
