@@ -11,7 +11,7 @@ Trabajo Final
 
 ### Introducción
 ##### Motivacion : razon de la existencia del proyecto 
-##### Problema : Claro p mascotsas
+##### Problema : El lenguaje de programación es uno de los lenguajes de programación más conocidos, y por ende uno de los más usado. Sin embargo, debido a su relativa antigüedad, cada año se ha quedado más corto respecto a las funciones que organicen una gran cantidad de datos, debido a que en todos estos años que han pasado desde que el C++ apareció, han surgido otros lenguajes de programación que pueden organizar fácilmente los datos, haciendo un uso eficiente de sus recursos. Por esa razón, el problema del que se va a solucionar es la carencia de una biblioteca que tenga funciones que organicen de manera eficiente un conjunto de datos, independientemente del tamaño de este conjunto. 
 ##### Solucion : La solución ante la problematica planteada, será implementar la librería Panda de Python en C++ la cuál nos permitirá trabajar con millones de datos de una forma eficiente.
 
 ### Objetivos
