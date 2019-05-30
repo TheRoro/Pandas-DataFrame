@@ -37,7 +37,7 @@ El informe tendrá los siguientes objetivos específicos:
 
 2)Crear un dataframe y exportarlo: Las funciones de la biblioteca podrán leer y exportar un archivo en el formato csv, tsv, etc.
 
-3) Diseñar el dataframe: Las funciones serán capaces de diseñar un dataframe a partir de un archivo y/o a partir de ciertos criterios.
+3)Diseñar el dataframe: Las funciones serán capaces de diseñar un dataframe a partir de un archivo y/o a partir de ciertos criterios.
 
 ### Marco Conceptual
 * Arboles: Los árboles son estructuras de datos no lineales, lo que los hace jerarquicos, las cuales poseen nodos que pueden apuntar a varios nodos. Los conceptos que se pueden definir son: 
