@@ -17,12 +17,18 @@ Trabajo Final
 ### Objetivos
 # Objetivo general: responder al problema y le da solucion
 Tras la introducción del informe, se procederá a explicar los objetivos generales que deberá de satisfacer las funciones de la biblioteca que se va a crear.
+
 1)Importación de datos: Las funciones serán capaces de reconocer, leer, y utilizar cualquier formato con un separador de campo, utilizando archivos con extensión csv, tsv, y ser capaz de convertirla a un dataframe.
+
 2)Indexado de datos por columna: Las funciones podrán indexar las columnas del dataframe, para optimizar la búsqueda de un elemento específico, usando una estructura de tipo árbol.
+
 3)Selección de datos por columnas: las funciones podrán seleccionar un dato en especifico, creando para eso un nuevo dataframe
 4)Filtrado de datos por columna: las funciones podrán filtrar una búsqueda usando distintos tipos de algoritmos.
+
 5)Ordenamiento de columnas: Mediante un tipo en especifico de algoritmo de ordenamiento, las columnas se ordenarán en un orden especifico, dependiendo del criterio que se desea hacer.
-6)Exportación de archivos: las funciones podrán exportar la información de un dataframe en una determinada extensión de archivo. 
+
+6)Exportación de archivos: las funciones podrán exportar la información de un dataframe en una determinada extensión de archivo.
+
 # Objetivos especificos: analizar, diseñar, desarrollar solucion
 ### Marco Conceptual
 * Arboles: Los árboles son estructuras de datos no lineales, lo que los hace jerarquicos, las cuales poseen nodos que pueden apuntar a varios nodos. Los conceptos que se pueden definir son: 
