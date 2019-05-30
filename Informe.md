@@ -23,6 +23,7 @@ Tras la introducción del informe, se procederá a explicar los objetivos genera
 2)Indexado de datos por columna: Las funciones podrán indexar las columnas del dataframe, para optimizar la búsqueda de un elemento específico, usando una estructura de tipo árbol.
 
 3)Selección de datos por columnas: las funciones podrán seleccionar un dato en especifico, creando para eso un nuevo dataframe
+
 4)Filtrado de datos por columna: las funciones podrán filtrar una búsqueda usando distintos tipos de algoritmos.
 
 5)Ordenamiento de columnas: Mediante un tipo en especifico de algoritmo de ordenamiento, las columnas se ordenarán en un orden especifico, dependiendo del criterio que se desea hacer.
