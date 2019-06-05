@@ -5,7 +5,7 @@ using namespace std;
 
 int main() {
 
-	cout << "VILARON GILl";
+	cout << "VILARON dGILl";
 	_getch();
 	return 0;
 }
