@@ -10,6 +10,7 @@ int main() {
 	cout << "eres gil";
 	cout << "juan ctm";
 	cout << "salio esto?";
+	cout << "error 404";
 	_getch();
 	return 0;
 }
