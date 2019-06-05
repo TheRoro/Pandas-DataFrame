@@ -1,7 +1,8 @@
 #pragma once
-ref class Row
-{
+class Row {
 public:
-	Row();
+	Row() {
+
+	}
 };
 
