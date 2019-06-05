@@ -5,11 +5,7 @@ using namespace std;
 
 int main() {
 
-	cout << "prueba";
-	cout << "holoa";
-	cout << "mascotita";
-	cout << "eres gil";
-	cout << "RODIRGO SI LEES ESTO ERES MONGOL Pe";
+	cout << "VILARON GIL";
 	_getch();
 	return 0;
 }
