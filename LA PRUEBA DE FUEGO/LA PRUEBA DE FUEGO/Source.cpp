@@ -9,6 +9,7 @@ int main() {
 	cout << "holoa";
 	cout << "mascotita";
 	cout << "eres gil";
+	cout << "juan ctm";
 	cout << "salio esto?";
 	_getch();
 	return 0;
