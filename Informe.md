@@ -50,7 +50,7 @@ El informe tendrá los siguientes objetivos específicos:
 * DataFrame: En la informática, un DataFrame se le puede definir como un paquete de datos, semejante a una matriz, la cual posee filas que se asocian a un sujeto, y también posee columnas, asociadas sus variables u objetos.
 * Ordenamiento Estable: Existen distintos algoritmos para ordenar datos, pero solo algunos de estos son estables, estos son definidos así ya que mantienen un orden parcial al ordenarse nuevamente por distinto objeto. Un ejemplo sería que el algoritmo realice un primer ordenamiento por nombre, para posteriormente ser ordenado por peso, pero este seguirá ordenado por orden alfabetico.
 ### Diagrama de clases (alto nivel)
-clase dataframe clase row clase column
+https://raw.githubusercontent.com/8rb/FDS5/master/Diagrama De Clases (Alto Nivel).jpeg
 
 ### Cronograma de trabajo
 * Hito 1:
