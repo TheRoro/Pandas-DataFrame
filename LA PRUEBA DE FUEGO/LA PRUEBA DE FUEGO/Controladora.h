@@ -10,7 +10,7 @@ public:
 	}
 	void menu() {
 
-		cout << "------------------------------PANDAS---------------------------" << endl;
+		cout << "------------------------------PANDAS--------------------------" << endl;
 		cout << "By: Los Papi Pros && Vila" << endl;
 		cout << "A. Importación de Datos " << endl;
 		cout << "B. Indexado de datos por columnas" << endl;
