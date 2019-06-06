@@ -4,5 +4,10 @@
 class DataFrame {
 
 
+public:
+	DataFrame() {
+
+	}
+
 
 };
