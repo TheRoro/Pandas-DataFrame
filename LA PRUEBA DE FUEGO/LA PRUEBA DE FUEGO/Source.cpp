@@ -14,7 +14,6 @@ int main() {
 	
 	control.menu();
 
-
 	_getch();
 	return 0;
 }
