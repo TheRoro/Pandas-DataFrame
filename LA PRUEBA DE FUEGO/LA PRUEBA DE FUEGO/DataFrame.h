@@ -89,6 +89,25 @@ private:
 		archivo.flush();
 		archivo.close();
 	}
+	void encontrarTipo(){
+		vector<string> a;
+	        vector<int> b;
+	        vector<double> c;
+	        string j;
+	        cin >> j;
+	       if((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)){
+		   cout << "Si" << " " << j[0] << endl;
+		   a.push_back(j);
+	        }else {
+		   double aux = stod(j);
+		   int aux2 = int(aux);
+		   if( aux != (double)aux2 ){
+			c.push_back(aux);
+		    }else{
+			b.push_back(aux2);
+		    }
+	       }
+	}
 	bool estaVacio() {
 		string x;
 		ifstream archivo("Files//data.txt");
