@@ -3,6 +3,7 @@
 
 class Column {
 	//vector<int> a;
+	vector<int> arr;
 	//este es solo de ejemplo, pero en teoria la variable deberia de ser poder cambiar dependiendo del tipo de dato
 public:
 	Column() {}
