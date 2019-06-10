@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include "Column.h"
 #include "Row.h"
 
@@ -33,23 +34,43 @@ public:
 		row = Row();
 	}
 	void importData() {
-			
-		int num = 9;
-		ifstream archivo("Files//data.txt");
-		archivo >> num;
-
-		for (short i = 0; i < num; i++) {
-			archivo >> nombre[i] >> apellido[i] >> equipo[i] >> sexo[i] >> edad[i] >> numero[i];
+		int Ncolumnas = 0; //prueba
+		int iteradorF = 0; // iterador de filas
+		int iteradorC = 0; // iterador de columnas
+		ifstream f("Numerost.txt");
+		bool contar = true;
+		string line, num;
+		if (!f.is_open())
+		{
+			cout << "El archivo no se logro abrir " << endl;
 		}
-
-		Limpiar();
-		archivo.close();
-
-		for (int i = 0; i < 10; i++) {
-			cout << nombre[i] << " " << apellido[i] << " " << equipo[i] << " ";
-			cout << sexo[i] << " " << edad[i] << " " << numero[i] << endl;
+		else {
+			while (f >> line)
+			{
+				stringstream ss(line);
+				while (getline(ss, num, ','))
+				{
+					cout << num << " " << endl; // prueba
+					//cout << num << " "; //esto es lo que normalmente iria para leer el archivo
+					if (contar) {
+						Ncolumnas++; //esto solo ocurre en la primera pasada(fila 1°)... Se genera la columna, usando la función FindType() para saber que 
+					}
+					iteradorC++;
+					cout << "--------------------" << endl;//prueba
+					cout << iteradorC << endl;//prueba
+					cout << "--------------------" << endl;//prueba
+					//pongo la función que me permite identificar el tipo de una variable y creo la columna
+				}
+				iteradorC = 0;
+				contar = false;
+				iteradorF++;// genero una nueva fila
+				cout << endl;
+			}
 		}
-
+		cout << "-------------------------" << endl; //prueba
+		cout << "N de f: " << iteradorF << endl;//prueba
+		cout << "N de columnas: " << Ncolumnas << endl;//prueba
+		f.close();
 	}
 	void indexData() {
 
