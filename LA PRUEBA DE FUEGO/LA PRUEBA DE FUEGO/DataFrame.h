@@ -76,7 +76,7 @@ public:
 	*/
 	void importData() {
 			
-		int num = 9;
+		int num = 5;
 		ifstream archivo("Files//data.txt");
 		archivo >> num;
 
@@ -87,7 +87,7 @@ public:
 		Limpiar();
 		archivo.close();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			cout << nombre[i] << " " << apellido[i] << " " << equipo[i] << " ";
 			cout << sexo[i] << " " << edad[i] << " " << numero[i] << endl;
 		}
@@ -115,13 +115,13 @@ public:
 		switch (opcion)
 		{
 		case 1:
-			heapSort(nombre);
+			heapSort(nombre, 5);
 			break;
 		case 2:
-			heapSort();
+			heapSort(apellido, 5);
 			break;
 		case 3:
-			heapSort();
+			heapSort(equipo, 5);
 			break;
 		case 4:
 			break;
