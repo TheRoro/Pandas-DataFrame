@@ -32,6 +32,48 @@ public:
 		//fila = fila(1);
 		row = Row();
 	}
+	/*
+	void importData() {	
+		int Ncolumnas = 0;
+		int Nfilas = 0; // iterador de filas
+		int iteradorC = 0;
+		ifstream f("Numerost.txt");
+		bool contar = true;
+		string line, num;
+		if (!f.is_open())
+		{
+			cout << "El archivo no se logro abrir " << endl;
+		}
+		else {
+			while (f >> line)
+			{
+				stringstream ss(line);
+				while (getline(ss, num, ','))
+				{
+					cout << num << " " << endl;
+					if (contar) {
+						Ncolumnas++; //esto solo ocurre en la primera pasada(fila 1°)... Se genera la columna, usando la función FindType() para saber que 
+					}
+					iteradorC++;
+					cout << "--------------------" << endl;
+					cout << iteradorC << endl;
+					cout << "--------------------" << endl;
+					//pongo la función que me permite identificar el tipo de una variable y creo la columna
+				}
+				iteradorC = 0;
+				contar = false;
+				Nfilas++;// genero una nueva fila
+				cout << endl;
+			}
+		}
+		cout << "-------------------------" << endl;
+		cout << "N de f: " << Nfilas << endl;//prueba
+		cout << "N de columnas: " << Ncolumnas << endl;//prueba
+		f.close();
+		_getch();
+
+	}
+	*/
 	void importData() {
 			
 		int num = 9;
