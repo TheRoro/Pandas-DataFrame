@@ -61,6 +61,31 @@ public:
 
 	}
 	void sortData() {
+		int opcion = 0;
+		cout << "Seleccione que columna desea ordenar: " << endl;
+		cout << "1. Nombre" << endl;
+		cout << "2. Apellido" << endl;
+		cout << "3. Equipo" << endl;
+		cout << "4. Sexo" << endl;
+		cout << "5. Edad" << endl;
+		cout << "6. Numero" << endl;
+		cin >> opcion;
+		switch (opcion)
+		{
+		case 1:
+			heapSort();
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		}
 
 	}
 	void exportData() {
@@ -111,5 +136,40 @@ private:
 		archivo.close();
 		if (x == " ") return true;
 
+	}
+	void siftDown(float* a, int start, int end) {
+		for (int root = start; root * 2 + 1 <= end; ) {
+			int child = root * 2 + 1;
+			int swap = root;
+			if (a[swap] < a[child]) swap = child;
+			if (child + 1 <= end && a[swap] < a[child + 1]) swap = child + 1;
+			if (swap == root) {
+				return;
+			}
+			else {
+				float t = a[root];
+				a[root] = a[swap];
+				a[swap] = t;
+				root = swap;
+			}
+		}
+	}
+	void heapify(float* a, int end) {
+		for (int i = (end - 1) / 2; i >= 0; i--) {
+			siftDown(a, i, end);
+		}
+
+	}
+	void heapSort(float* a, int n) {
+		heapify(a, n);
+		for (int i = 0; i < 10; i++) {
+			cout << a[i] << " " << endl;
+		}
+		for (int end = n - 1; end > 0; end--) {
+			float t = a[end];
+			a[end] = a[0];
+			a[0] = t;
+			siftDown(a, 0, end - 1);
+		}
 	}
 };
