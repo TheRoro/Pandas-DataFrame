@@ -115,7 +115,7 @@ public:
 		switch (opcion)
 		{
 		case 1:
-			//heapSort()
+			//heapSort();
 			break;
 		case 2:
 			break;
