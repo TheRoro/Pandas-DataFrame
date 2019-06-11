@@ -1,5 +1,6 @@
 #include <iostream>
 #include <conio.h>
+#include <locale.h>
 #include "Controladora.h"
 
 
@@ -7,6 +8,8 @@ using namespace std;
 using namespace System;
 
 int main() {	
+
+	setlocale(LC_ALL, "spanish");
 
 	Controladora control = Controladora();
 
