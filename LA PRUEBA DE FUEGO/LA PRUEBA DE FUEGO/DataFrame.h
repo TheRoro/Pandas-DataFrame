@@ -115,11 +115,13 @@ public:
 		switch (opcion)
 		{
 		case 1:
-			//heapSort();
+			heapSort(nombre);
 			break;
 		case 2:
+			heapSort();
 			break;
 		case 3:
+			heapSort();
 			break;
 		case 4:
 			break;
@@ -179,7 +181,7 @@ private:
 		if (x == " ") return true;
 
 	}
-	void siftDown(float* a, int start, int end) {
+	void siftDown(string *a, int start, int end) {
 		for (int root = start; root * 2 + 1 <= end; ) {
 			int child = root * 2 + 1;
 			int swap = root;
@@ -189,29 +191,30 @@ private:
 				return;
 			}
 			else {
-				float t = a[root];
+				string t = a[root];
 				a[root] = a[swap];
 				a[swap] = t;
 				root = swap;
 			}
 		}
 	}
-	void heapify(float* a, int end) {
-		for (int i = (end - 1) / 2; i >= 0; i--) {
+	void heapify(string *a, int end) {
+		for (int i = (end - 2) / 2; i >= 0; i--) {
 			siftDown(a, i, end);
 		}
 
 	}
-	void heapSort(float* a, int n) {
+	void heapSort(string *a, int n) {
 		heapify(a, n);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			cout << a[i] << " " << endl;
 		}
 		for (int end = n - 1; end > 0; end--) {
-			float t = a[end];
+			string t = a[end];
 			a[end] = a[0];
 			a[0] = t;
 			siftDown(a, 0, end - 1);
 		}
 	}
+
 };
