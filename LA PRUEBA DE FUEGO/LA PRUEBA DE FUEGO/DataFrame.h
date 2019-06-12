@@ -26,6 +26,8 @@ class DataFrame {
 	int*    edad = new int[n];
 	int*    numero = new int[n];
 
+
+
 public:
 	DataFrame() {
 	    columna = Column();
@@ -133,7 +135,18 @@ public:
 		case 6:
 			break;
 		case 7:
+			cin >> nombre[0];
+			cin >> nombre[1];
+			cin >> nombre[2];
+			cin >> nombre[3];
+
 			heapSortTodos(nombre, 5);
+
+			cout << "Arreglo ordenado:" << endl;
+			for (int i = 0; i < 5; i++) {
+				cout << nombre[i] << " ";
+			}
+
 			break;
 		case 8:
 			heapSortTodos(apellido, 5);
