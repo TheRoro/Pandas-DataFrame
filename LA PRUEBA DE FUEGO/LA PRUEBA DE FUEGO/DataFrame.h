@@ -111,6 +111,9 @@ public:
 		cout << "4. Sexo" << endl;
 		cout << "5. Edad" << endl;
 		cout << "6. Numero" << endl;
+		cout << "7. Ordenar todos los arreglos a partir del nombre" << endl;
+		cout << "8. Ordenar todos los arreglos a partir del apellido" << endl;
+		cout << "9. Ordenar todos los arreglos a partir del equipo" << endl;
 		cin >> opcion;
 		switch (opcion)
 		{
@@ -129,8 +132,16 @@ public:
 			break;
 		case 6:
 			break;
+		case 7:
+			heapSortTodos(nombre, 5);
+			break;
+		case 8:
+			heapSortTodos(apellido, 5);
+			break;
+		case 9:
+			heapSortTodos(equipo, 5);
+			break;
 		}
-
 	}
 	void exportData() {
 
@@ -214,6 +225,102 @@ private:
 			a[end] = a[0];
 			a[0] = t;
 			siftDown(a, 0, end - 1);
+		}
+	}
+	void siftDownS(string* a, int start, int end) {
+		for (int root = start; root * 2 + 1 <= end; ) {
+			int child = root * 2 + 1;
+			int swap = root;
+			if (a[swap] < a[child]) swap = child;
+			if (child + 1 <= end && a[swap] < a[child + 1]) swap = child + 1;
+			if (swap == root) {
+				return;
+			}
+			else {
+				if (a[0] == nombre[0]) {
+					string t = a[root];
+					string A = apellido[root];
+					string E = equipo[root];
+					a[root] = a[swap];
+					apellido[root] = apellido[swap];
+					equipo[root] = equipo[swap];
+					a[swap] = t;
+					apellido[swap] = A;
+					equipo[swap] = E;
+					root = swap;
+				}
+				else if (a[0] == apellido[0]) {
+					string t = nombre[root];
+					string A = a[root];
+					string E = equipo[root];
+					nombre[root] = nombre[swap];
+					a[root] = a[swap];
+					equipo[root] = equipo[swap];
+					nombre[swap] = t;
+					a[swap] = A;
+					equipo[swap] = E;
+					root = swap;
+				}
+				else if (a[0] == equipo[0]) {
+					string t = nombre[root];
+					string A = apellido[root];
+					string E = a[root];
+					nombre[root] = nombre[swap];
+					a[root] = a[swap];
+					equipo[root] = equipo[swap];
+					nombre[swap] = t;
+					apellido[swap] = A;
+					a[swap] = E;
+					root = swap;
+				}
+			}
+		}
+	}
+	void heapifyS(string*a, int end) {
+		for (int i = (end - 2) / 2; i >= 0; i--) {
+			siftDownS(a, i, end);
+		}
+	}
+	void heapSortTodos(string*a , int n) {
+		heapifyS(a,n);
+		for (int i = 0; i < 5; i++) {
+			cout << nombre[i] << " " << apellido[i] << " " <<equipo[i] << " "<< endl;
+		}
+		for (int end = n - 1; end > 0; end--) {
+			if (a[0] == nombre[0]) {
+				string t = a[end];
+				string A = apellido[end];
+				string E = equipo[end];
+				a[end] = a[0];
+				apellido[end] = apellido[0];
+				equipo[end] = equipo[0];
+				a[0] = t;
+				apellido[0] = A;
+				equipo[0] = E;
+			}
+			else if (a[0] == apellido[0]) {
+				string t = nombre[end];
+				string A = a[end];
+				string E = equipo[end];
+				nombre[end] = nombre[0];
+				a[end] = a[0];
+				equipo[end] = equipo[0];
+				nombre[0] = t;
+				a[0] = A;
+				equipo[0] = E;
+			}
+			else if (a[0] == equipo[0]) {
+				string t = nombre[end];
+				string A = apellido[end];
+				string E = a[end];
+				nombre[end] = nombre[0];
+				apellido[end] = apellido[0];
+				a[end] = a[0];
+				nombre[0] = t;
+				apellido[0] = A;
+				a[0] = E;
+			}
+			siftDownS(a, 0, end - 1);
 		}
 	}
 
