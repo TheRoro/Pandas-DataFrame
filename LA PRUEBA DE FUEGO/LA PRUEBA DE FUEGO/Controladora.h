@@ -22,6 +22,7 @@ public:
 			cout << "E. Ordenamiento de datos por columnas" << endl;
 			cout << "F. Exportación de datos a archivos planos con diferente formato" << endl;
 			cout << "G. Salir del Programa" << endl;
+			cout << "H. Crear Dataframe desde 0" << endl;
 			cin >> option;
 
 			switch (option) {
@@ -45,6 +46,9 @@ public:
 				break;
 			case 'G':
 				continuar = false;
+				break;
+			case 'H':
+				dataFrame.crear();
 				break;
 			}
 		} while (continuar);
