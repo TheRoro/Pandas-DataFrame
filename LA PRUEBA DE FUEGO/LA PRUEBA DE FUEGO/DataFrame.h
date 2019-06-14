@@ -15,9 +15,10 @@ using namespace std;
 
 
 class DataFrame {
-	Column columna;
-	Row row;
-	//vector<fila* > arr
+
+	vector <Column*>* columns;
+	vector <Row*>*	  rows;
+
 	int n = 10;
 	string* nombre = new string[n];
 	string* apellido = new string[n];
@@ -26,14 +27,12 @@ class DataFrame {
 	int*    edad = new int[n];
 	int*    numero = new int[n];
 
-
-
 public:
 	DataFrame() {
-	    columna = Column();
-		//fila = fila(1);
-		row = Row();
+		columns = new vector<Column*>;
+		rows = new vector<Row*>;
 	}
+
 	/*
 	void importData() {	
 		int Ncolumnas = 0;
@@ -76,6 +75,7 @@ public:
 
 	}
 	*/
+
 	void importData() {
 			
 		int num = 5;
@@ -84,6 +84,7 @@ public:
 
 		for (short i = 0; i < num; i++) {
 			archivo >> nombre[i] >> apellido[i] >> equipo[i] >> sexo[i] >> edad[i] >> numero[i];
+			
 		}
 
 		Limpiar();
@@ -168,6 +169,30 @@ public:
 			archivo << sexo[i] << " " << edad[i] << " " << numero[i] << endl;
 		}
 		archivo.close();
+
+	}
+	void crear() {
+		int numCol, numFil;
+		cout << "Ingrese el numero de columnas: " << endl;
+		cin >> numCol;
+		cout << "Ingrese el numero de filas: " << endl;
+		cin >> numFil;
+		columns->at(i)->getDataAt_j(0);
+		string s;
+		for (int i = 0; i < numCol; i++) {
+			columna = new Column();
+
+			columns->push_back(columna);
+			for (int j = 0; j < numFil; j++) {
+				cin >> s;
+				columns->at(i)->add(s);
+			}
+		}
+		for (int i = 0; i < 4; i++) {
+			cout << columns->at(i)->getDataAt_j(1);
+		}
+
+
 
 	}
 private:

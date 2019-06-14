@@ -4,14 +4,14 @@
 
 class Row {
 private:
-	int ind;
+	int index;
 	/*
 	auto a, auto b , auto c , auto d , etc
 	vector<int> arr;
 	*/
 public:
 	Row() {
-		ind = 1;
+		index = 1;
 	}
 	/*void asignarValores(vector<Column> a) {
 		for (int j = 0; j < a.size(); j++) {
