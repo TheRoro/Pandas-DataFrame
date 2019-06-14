@@ -1,24 +1,28 @@
 #pragma once
-#include<vector>
-#include"Column.h"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stdlib.h>
+
+using namespace std;
 
 class Row {
-private:
+protected:
 	int index;
-	/*
-	auto a, auto b , auto c , auto d , etc
-	vector<int> arr;
-	*/
+	string info;
+
 public:
 	Row() {
 		index = 1;
 	}
-	/*void asignarValores(vector<Column> a) {
-		for (int j = 0; j < a.size(); j++) {
-			
-			arr(j) = (*it)->posicion(index);
-			
-		}
-	}*/
+	void setInfo(string info) {
+		this->info = info;
+	}
+
+	string getInfo() {
+
+		return info;
+	}
+
 };
 
