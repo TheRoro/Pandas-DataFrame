@@ -177,22 +177,35 @@ public:
 		cin >> numCol;
 		cout << "Ingrese el numero de filas: " << endl;
 		cin >> numFil;
-		columns->at(i)->getDataAt_j(0);
-		string s;
+		//columns->at(i)->getDataAt_j(0);
+		string s = " ";
 		for (int i = 0; i < numCol; i++) {
-			columna = new Column();
 
+			Column* columna;
+			columna = new Column();
 			columns->push_back(columna);
+
 			for (int j = 0; j < numFil; j++) {
+
+				Row* row;
+				row = new Row();
+				cout << "Ingrese elemento en la columna: " << i + 1 << " y fila: " << j + 1 << endl;
 				cin >> s;
-				columns->at(i)->add(s);
+				row->setInfo(s);
+				columns->at(i)->add(*row);
 			}
 		}
-		for (int i = 0; i < 4; i++) {
-			cout << columns->at(i)->getDataAt_j(1);
+		cout << endl << endl << "SHOWING DATAFRAME 1:" << endl;
+		cout << "////////////////////////////////////////" << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				cout << columns->at(i)->getDataAt_j(j) << " ";
+			}
+			cout << endl;
 		}
 
-
+	}
+	void show() {
 
 	}
 private:

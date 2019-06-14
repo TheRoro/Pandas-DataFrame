@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <stdlib.h>
+#include "Row.h"
 
 using namespace std;
 
@@ -11,15 +12,15 @@ class Column {
 public:
 	Column() {
 		string nombre;
-		
-		rows.push_back();
+
+
 	}
 	string getDataAt_j(int j) {
 		
-		return rows.at(j);
+		return rows.at(j).getInfo();
 	}
-	void add(string s) {
-		rows.push_back(s);
+	void add(Row r) {
+		rows.push_back(r);
 	}
 
 };
