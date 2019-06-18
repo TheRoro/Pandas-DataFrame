@@ -76,25 +76,55 @@ public:
 	}
 	*/
 
-	void importData() {
-			
-		int num = 5;
-		ifstream archivo("Files//data.txt");
-		archivo >> num;
+	void importData(char sep) {
+		int numCol = 1;
+		ifstream archivo;
+		ifstream temporal;
+		archivo.open("Files//peladas.txt");
+		temporal.open("Files//peladas.txt");
+		string linea;
+		getline(temporal, linea);
+		if (sep == 'C') {
+			//FOR PARA SABER LA CANTIDAD DE COLUMNAS
+			for (int i = 0; i < linea.size(); i++) {
+				if (linea[i] == ',') numCol++;
+			}
+			cout << numCol << endl;
+			//FOR PARA TENER CREADAS TODAS LAS COLUMNAS
+			for (int i = 0; i < numCol; i++) {
+				Column* columna;
+				columna = new Column();
+				columns->push_back(columna);
+			}
 
-		for (short i = 0; i < num; i++) {
-			archivo >> nombre[i] >> apellido[i] >> equipo[i] >> sexo[i] >> edad[i] >> numero[i];
-			
+			int i = 0;
+			int numFil = 0;
+			linea = " ";
+			while (archivo.good()) {
+				if (i == numCol) {
+					i = 0;
+					numFil++;
+				}
+				getline(archivo, linea, ',');
+				Row* row;
+				row = new Row();
+				
+				row->setInfo(linea);
+				columns->at(i)->add(*row);
+				i++;
+			}
+			for (int j = 0; j < numFil; j++) {
+				for (int i = 0; i < numCol; i++) {
+					cout << columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+
 		}
-
-		Limpiar();
-		archivo.close();
-
-		for (int i = 0; i < 5; i++) {
-			cout << nombre[i] << " " << apellido[i] << " " << equipo[i] << " ";
-			cout << sexo[i] << " " << edad[i] << " " << numero[i] << endl;
+		else if (sep == 'T') {
+			for (int i = 0; i < linea.size(); i++) {
+				if (linea[i] == '	') numCol++;
+			}
 		}
-
 	}
 	void indexData() {
 
