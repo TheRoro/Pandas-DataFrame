@@ -27,7 +27,12 @@ public:
 
 			switch (option) {
 			case 'A':
-				dataFrame.importData();
+				char sep;
+				cout << "Separador: " << endl;
+				cout << "C. Coma (CSV) " << endl;
+				cout << "T. Tab  (TSV) " << endl;
+				cin >> sep;
+				dataFrame.importData(sep);
 				break;
 			case 'B':
 				dataFrame.indexData();
