@@ -19,10 +19,6 @@ public:
 		this->info = info;
 	}
 
-	string getInfo() {
-
-		return info;
-	}
-
+	string getInfo() { return info; }
 };
 

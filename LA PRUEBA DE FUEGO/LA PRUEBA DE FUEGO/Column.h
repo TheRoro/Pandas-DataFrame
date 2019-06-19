@@ -12,6 +12,7 @@ class Column {
 
 public:
 	Column() {
+		tipo = " ";
 		string nombre;
 	}
 	string getDataAt_j(int j) {
@@ -21,6 +22,7 @@ public:
 	void add(Row r) {
 		rows.push_back(r);
 	}
+private:
 	int FindType(string j) {
 		if ((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)) {
 			return 0; //retorna 0 si es string
@@ -36,4 +38,22 @@ public:
 			}
 		}
 	}
+	void CambiarPosición(int i, int j ) {
+		string temporal = rows.at(i).getInfo();
+		rows[i].setInfo(rows[j].getInfo());
+		rows[j].setInfo(temporal);
+	}
+public:
+	void StaType(Row r) { // establecer tipo
+		if (FindType(r.getInfo()) == 0) {
+			tipo = "string";
+		}
+		else if (FindType(r.getInfo()) == -1) {
+			tipo = "Double";
+		}
+		else if (FindType(r.getInfo()) == 1) {
+			tipo = "Int";
+		}
+	}
+
 };
