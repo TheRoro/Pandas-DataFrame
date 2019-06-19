@@ -18,6 +18,8 @@ class DataFrame {
 
 	vector <Column*>* columns;
 	vector <Row*>*	  rows;
+	int nc;
+	int nf;
 
 	int n = 10;
 	string* nombre = new string[n];
@@ -31,6 +33,8 @@ public:
 	DataFrame() {
 		columns = new vector<Column*>;
 		rows = new vector<Row*>;
+		nc = 0;
+		nf = 0;
 	}
 
 	/*
@@ -111,14 +115,19 @@ public:
 				
 				row->setInfo(linea);
 				columns->at(i)->add(*row);
+				/*if (numFil == 0) {
+					columns->at(i)->StaType(*row);
+				}*/
 				i++;
 			}
 			for (int j = 0; j < numFil; j++) {
 				for (int i = 0; i < numCol; i++) {
 					cout << columns->at(i)->getDataAt_j(j) << "		";
 				}
-			}
 
+			}
+			nf = numFil;
+			nc = numCol;
 		}
 		else if (sep == 'T') {
 			for (int i = 0; i < linea.size(); i++) {
@@ -128,6 +137,14 @@ public:
 	}
 	void indexData() {
 
+	}
+	void Mostrar() {
+		for (int j = 0; j < nf; j++) {
+			for (int i = 0; i < nc; i++) {
+				cout << columns->at(j)->getDataAt_j(i) << " ";
+			}
+			cout << endl;
+		}
 	}
 	void selectData() {
 
