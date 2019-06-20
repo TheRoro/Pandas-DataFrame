@@ -212,55 +212,24 @@ public:
 
 	}
 	void sortData() {
-		int opcion = 0;
-		cout << "Seleccione que columna desea ordenar: " << endl;
-		cout << "1. Nombre" << endl;
-		cout << "2. Apellido" << endl;
-		cout << "3. Equipo" << endl;
-		cout << "4. Sexo" << endl;
-		cout << "5. Edad" << endl;
-		cout << "6. Numero" << endl;
-		cout << "7. Ordenar todos los arreglos a partir del nombre" << endl;
-		cout << "8. Ordenar todos los arreglos a partir del apellido" << endl;
-		cout << "9. Ordenar todos los arreglos a partir del equipo" << endl;
-		cin >> opcion;
-		switch (opcion)
-		{
-		case 1:
-			heapSort(nombre, 5);
-			break;
-		case 2:
-			heapSort(apellido, 5);
-			break;
-		case 3:
-			heapSort(equipo, 5);
-			break;
-		case 4:
-			break;
-		case 5:
-			break;
-		case 6:
-			break;
-		case 7:
-			cin >> nombre[0];
-			cin >> nombre[1];
-			cin >> nombre[2];
-			cin >> nombre[3];
-
-			heapSortTodos(nombre, 5);
-
-			cout << "Arreglo ordenado:" << endl;
-			for (int i = 0; i < 5; i++) {
-				cout << nombre[i] << " ";
+		//DataFrame dfSorted = DataFrame();
+		int col = 5;
+		for (int i = 0; i < 6 -1 ; i++) {
+			for (int j = 0; j < 5 - i - 1; j++) {
+				if (columns->at(col)->getDataAt_j(j) > columns->at(col)->getDataAt_j(j+1)) {
+					for (int k = 0; k < 6; k++) {
+						string temporal = columns->at(k)->getDataAt_j(j);
+						columns->at(k)->setDataAt_j(j , columns->at(k)->getDataAt_j(j + 1));
+						columns->at(k)->setDataAt_j(j + 1, temporal);
+					}
+				}
 			}
-
-			break;
-		case 8:
-			heapSortTodos(apellido, 5);
-			break;
-		case 9:
-			heapSortTodos(equipo, 5);
-			break;
+		}
+		for (int j = 0; j < 5; j++) {
+			for (int i = 0; i < 6; i++) {
+				cout << columns->at(i)->getDataAt_j(j) << "		";
+			}
+			cout << endl;
 		}
 	}
 	void exportData() {
