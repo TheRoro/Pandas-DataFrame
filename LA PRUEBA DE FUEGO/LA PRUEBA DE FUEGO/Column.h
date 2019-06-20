@@ -19,6 +19,10 @@ public:
 		
 		return rows.at(j).getInfo();
 	}
+	void setDataAt_j(int j, string data) {
+
+		rows.at(j).setInfo(data);
+	}
 	void add(Row r) {
 		rows.push_back(r);
 	}
