@@ -100,6 +100,7 @@ public:
 				columna = new Column();
 				columns->push_back(columna);
 			}
+			
 
 			int i = 0;
 			int numFil = 0;
