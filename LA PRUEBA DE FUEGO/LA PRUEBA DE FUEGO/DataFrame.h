@@ -84,8 +84,8 @@ public:
 		int numCol = 1;
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("Files//peladastab.txt");
-		temporal.open("Files//peladastab.txt");
+		archivo.open("peladas.txt");
+		temporal.open("peladas.txt");
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C') {
