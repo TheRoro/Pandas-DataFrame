@@ -93,7 +93,6 @@ public:
 			for (int i = 0; i < linea.size(); i++) {
 				if (linea[i] == ',') numCol++;
 			}
-			cout << numCol << endl;
 			//FOR PARA TENER CREADAS TODAS LAS COLUMNAS
 			for (int i = 0; i < numCol; i++) {
 				Column* columna;
@@ -103,29 +102,41 @@ public:
 			
 
 			int i = 0;
-			int numFil = 0;
+			int numFil = 1;
 			linea = " ";
 			while (archivo.good()) {
 				if (i == numCol) {
 					i = 0;
 					numFil++;
 				}
-				getline(archivo, linea, ',');
-				Row* row;
-				row = new Row();
-				
-				row->setInfo(linea);
-				columns->at(i)->add(*row);
+
+				if (i == numCol - 1) {
+					getline(archivo, linea, '\n');
+					Row* row;
+					row = new Row();
+					row->setInfo(linea);
+					columns->at(i)->add(*row);
+				}
+				else {
+					getline(archivo, linea, ',');
+					Row* row;
+					row = new Row();
+					row->setInfo(linea);
+					columns->at(i)->add(*row);
+				}
+
 				/*if (numFil == 0) {
 					columns->at(i)->StaType(*row);
 				}*/
 				i++;
 			}
+			cout << "Numero de columnas: " << numCol << endl;
+			cout << "Numero de filas: "  << numFil << endl;
 			for (int j = 0; j < numFil; j++) {
 				for (int i = 0; i < numCol; i++) {
 					cout << columns->at(i)->getDataAt_j(j) << "		";
 				}
-
+				cout << endl;
 			}
 			nf = numFil;
 			nc = numCol;
