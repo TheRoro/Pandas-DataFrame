@@ -13,10 +13,11 @@ int main() {
 
 	Controladora control = Controladora();
 
-	system("Color 0F");
+	system("Color 07");
 	
 	control.menu();
 
 	_getch();
 	return 0;
+
 }

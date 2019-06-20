@@ -100,7 +100,6 @@ public:
 				columns->push_back(columna);
 			}
 			
-
 			int i = 0;
 			int numFil = 1;
 			linea = " ";
