@@ -269,7 +269,7 @@ private:
 	}
 	int FindType(string j) {
 		if ((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)) {
-			return 1; //retorna 0 si es string
+			return 0; //retorna 0 si es string
 		}
 		else {
 			double aux = stod(j);
