@@ -1,0 +1,5 @@
+Andrea,Miranda,TPPPP,F,18,69
+Fifi,Barri,Seniors,F,18,20
+Pechuga,Rodrigu,LSDDD,F,18,666
+Mikela,tang,Escolta,F,17,10
+Romi,Olivero,MAYORES,F,13,696969
