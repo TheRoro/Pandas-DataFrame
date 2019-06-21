@@ -23,14 +23,6 @@ class DataFrame {
 	int numCol = 1;
 	int numFil = 1;
 
-	int n = 10;
-	string* nombre = new string[n];
-	string* apellido = new string[n];
-	string* equipo = new string[n];
-	char*   sexo = new char[n];
-	int*    edad = new int[n];
-	int*    numero = new int[n];
-
 public:
 	DataFrame() {
 		columns = new vector<Column*>;
@@ -208,7 +200,7 @@ private:
 	void Limpiar() {
 		string x;
 		x = "                                                      ";
-		ofstream archivo("Files//data.txt");
+		ofstream archivo("peladas.txt");
 		if (!archivo.is_open()) {
 			cout << "error";
 		}
@@ -233,142 +225,10 @@ private:
 	}
 	bool estaVacio() {
 		string x;
-		ifstream archivo("Files//data.txt");
+		ifstream archivo("peladas.txt");
 		archivo >> x;
 		archivo.close();
 		if (x == " ") return true;
 
 	}
-	void siftDown(string *a, int start, int end) {
-		for (int root = start; root * 2 + 1 <= end; ) {
-			int child = root * 2 + 1;
-			int swap = root;
-			if (a[swap] < a[child]) swap = child;
-			if (child + 1 <= end && a[swap] < a[child + 1]) swap = child + 1;
-			if (swap == root) {
-				return;
-			}
-			else {
-				string t = a[root];
-				a[root] = a[swap];
-				a[swap] = t;
-				root = swap;
-			}
-		}
-	}
-	void heapify(string *a, int end) {
-		for (int i = (end - 2) / 2; i >= 0; i--) {
-			siftDown(a, i, end);
-		}
-
-	}
-	void heapSort(string *a, int n) {
-		heapify(a, n);
-		for (int i = 0; i < 5; i++) {
-			cout << a[i] << " " << endl;
-		}
-		for (int end = n - 1; end > 0; end--) {
-			string t = a[end];
-			a[end] = a[0];
-			a[0] = t;
-			siftDown(a, 0, end - 1);
-		}
-	}
-	void siftDownS(string* a, int start, int end) {
-		for (int root = start; root * 2 + 1 <= end; ) {
-			int child = root * 2 + 1;
-			int swap = root;
-			if (a[swap] < a[child]) swap = child;
-			if (child + 1 <= end && a[swap] < a[child + 1]) swap = child + 1;
-			if (swap == root) {
-				return;
-			}
-			else {
-				if (a[0] == nombre[0]) {
-					string t = a[root];
-					string A = apellido[root];
-					string E = equipo[root];
-					a[root] = a[swap];
-					apellido[root] = apellido[swap];
-					equipo[root] = equipo[swap];
-					a[swap] = t;
-					apellido[swap] = A;
-					equipo[swap] = E;
-					root = swap;
-				}
-				else if (a[0] == apellido[0]) {
-					string t = nombre[root];
-					string A = a[root];
-					string E = equipo[root];
-					nombre[root] = nombre[swap];
-					a[root] = a[swap];
-					equipo[root] = equipo[swap];
-					nombre[swap] = t;
-					a[swap] = A;
-					equipo[swap] = E;
-					root = swap;
-				}
-				else if (a[0] == equipo[0]) {
-					string t = nombre[root];
-					string A = apellido[root];
-					string E = a[root];
-					nombre[root] = nombre[swap];
-					a[root] = a[swap];
-					equipo[root] = equipo[swap];
-					nombre[swap] = t;
-					apellido[swap] = A;
-					a[swap] = E;
-					root = swap;
-				}
-			}
-		}
-	}
-	void heapifyS(string*a, int end) {
-		for (int i = (end - 2) / 2; i >= 0; i--) {
-			siftDownS(a, i, end);
-		}
-	}
-	void heapSortTodos(string*a , int n) {
-		heapifyS(a,n);
-		for (int i = 0; i < 5; i++) {
-			cout << nombre[i] << " " << apellido[i] << " " <<equipo[i] << " "<< endl;
-		}
-		for (int end = n - 1; end > 0; end--) {
-			if (a[0] == nombre[0]) {
-				string t = a[end];
-				string A = apellido[end];
-				string E = equipo[end];
-				a[end] = a[0];
-				apellido[end] = apellido[0];
-				equipo[end] = equipo[0];
-				a[0] = t;
-				apellido[0] = A;
-				equipo[0] = E;
-			}
-			else if (a[0] == apellido[0]) {
-				string t = nombre[end];
-				string A = a[end];
-				string E = equipo[end];
-				nombre[end] = nombre[0];
-				a[end] = a[0];
-				equipo[end] = equipo[0];
-				nombre[0] = t;
-				a[0] = A;
-				equipo[0] = E;
-			}
-			else if (a[0] == equipo[0]) {
-				string t = nombre[end];
-				string A = apellido[end];
-				string E = a[end];
-				nombre[end] = nombre[0];
-				apellido[end] = apellido[0];
-				a[end] = a[0];
-				nombre[0] = t;
-				apellido[0] = A;
-				a[0] = E;
-			}
-			siftDownS(a, 0, end - 1);
-		}
-	}
-
 };
