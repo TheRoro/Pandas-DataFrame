@@ -20,6 +20,8 @@ class DataFrame {
 	vector <Row*>*	  rows;
 	int nc;
 	int nf;
+	int numCol = 1;
+	int numFil = 1;
 
 	int n = 10;
 	string* nombre = new string[n];
@@ -36,52 +38,8 @@ public:
 		nc = 0;
 		nf = 0;
 	}
-
-	/*
-	void importData() {	
-		int Ncolumnas = 0;
-		int Nfilas = 0; // iterador de filas
-		int iteradorC = 0;
-		ifstream f("Numerost.txt");
-		bool contar = true;
-		string line, num;
-		if (!f.is_open())
-		{
-			cout << "El archivo no se logro abrir " << endl;
-		}
-		else {
-			while (f >> line)
-			{
-				stringstream ss(line);
-				while (getline(ss, num, ','))
-				{
-					cout << num << " " << endl;
-					if (contar) {
-						Ncolumnas++; //esto solo ocurre en la primera pasada(fila 1°)... Se genera la columna, usando la función FindType() para saber que 
-					}
-					iteradorC++;
-					cout << "--------------------" << endl;
-					cout << iteradorC << endl;
-					cout << "--------------------" << endl;
-					//pongo la función que me permite identificar el tipo de una variable y creo la columna
-				}
-				iteradorC = 0;
-				contar = false;
-				Nfilas++;// genero una nueva fila
-				cout << endl;
-			}
-		}
-		cout << "-------------------------" << endl;
-		cout << "N de f: " << Nfilas << endl;//prueba
-		cout << "N de columnas: " << Ncolumnas << endl;//prueba
-		f.close();
-		_getch();
-
-	}
-	*/
-
 	void importData(char sep) {
-		int numCol = 1;
+
 		ifstream archivo;
 		ifstream temporal;
 		archivo.open("peladas.txt");
@@ -99,16 +57,14 @@ public:
 				columna = new Column();
 				columns->push_back(columna);
 			}
-			
 			int i = 0;
-			int numFil = 1;
+			numFil = 1;
 			linea = " ";
 			while (archivo.good()) {
 				if (i == numCol) {
 					i = 0;
 					numFil++;
 				}
-
 				if (i == numCol - 1) {
 					getline(archivo, linea, '\n');
 					Row* row;
@@ -129,16 +85,6 @@ public:
 				}*/
 				i++;
 			}
-			cout << "Numero de columnas: " << numCol << endl;
-			cout << "Numero de filas: "  << numFil << endl;
-			for (int j = 0; j < numFil; j++) {
-				for (int i = 0; i < numCol; i++) {
-					cout << columns->at(i)->getDataAt_j(j) << "		";
-				}
-				cout << endl;
-			}
-			nf = numFil;
-			nc = numCol;
 		}
 		else if (sep == 'T') {
 			//FOR PARA SABER LA CANTIDAD DE COLUMNAS
@@ -151,10 +97,8 @@ public:
 				columna = new Column();
 				columns->push_back(columna);
 			}
-
-
 			int i = 0;
-			int numFil = 1;
+			numFil = 1;
 			linea = " ";
 			while (archivo.good()) {
 				if (i == numCol) {
@@ -182,25 +126,17 @@ public:
 				}*/
 				i++;
 			}
-			cout << "Numero de columnas: " << numCol << endl;
-			cout << "Numero de filas: " << numFil << endl;
-			for (int j = 0; j < numFil; j++) {
-				for (int i = 0; i < numCol; i++) {
-					cout << columns->at(i)->getDataAt_j(j) << "		";
-				}
-				cout << endl;
-			}
-			nf = numFil;
-			nc = numCol;
+
 		}
+		Mostrar(numFil, numCol);
 	}
 	void indexData() {
 
 	}
-	void Mostrar() {
-		for (int j = 0; j < nf; j++) {
-			for (int i = 0; i < nc; i++) {
-				cout << columns->at(j)->getDataAt_j(i) << " ";
+	void Mostrar(int numFil, int numCol) {
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				cout << columns->at(i)->getDataAt_j(j) << "		";
 			}
 			cout << endl;
 		}
@@ -209,12 +145,11 @@ public:
 
 	}
 	void filterData() {
-
+		DataFrame df_Filtered = DataFrame();
 	}
-	void sortData() {
+	void sortData(int col) {
 		//DataFrame dfSorted = DataFrame();
-		int col = 5;
-		for (int i = 0; i < 6 -1 ; i++) {
+		for (int i = 0; i < 6 - 1 ; i++) {
 			for (int j = 0; j < 5 - i - 1; j++) {
 				if (columns->at(col)->getDataAt_j(j) > columns->at(col)->getDataAt_j(j+1)) {
 					for (int k = 0; k < 6; k++) {
@@ -225,34 +160,23 @@ public:
 				}
 			}
 		}
-		for (int j = 0; j < 5; j++) {
-			for (int i = 0; i < 6; i++) {
-				cout << columns->at(i)->getDataAt_j(j) << "		";
-			}
-			cout << endl;
-		}
+		Mostrar(numFil, numCol);
 	}
 	void exportData() {
 
 		ofstream archivo;
-		archivo.open("Files//data.txt");
-		int numFilas = 10;
-		archivo << numFilas << " ";
+		archivo.open("peladas.txt");
 
-		for (int i = 0; i < 10; i++) {
-			archivo << nombre[i] << " " << apellido[i] << " " << equipo[i] << " ";
-			archivo << sexo[i] << " " << edad[i] << " " << numero[i] << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				archivo << columns->at(i)->getDataAt_j(j) << "	";
+			}
+			archivo << endl;
 		}
 		archivo.close();
-
 	}
-	void crear() {
-		int numCol, numFil;
-		cout << "Ingrese el numero de columnas: " << endl;
-		cin >> numCol;
-		cout << "Ingrese el numero de filas: " << endl;
-		cin >> numFil;
-		//columns->at(i)->getDataAt_j(0);
+	void crear(int numFil, int numCol) {
+
 		string s = " ";
 		for (int i = 0; i < numCol; i++) {
 
@@ -278,9 +202,6 @@ public:
 			}
 			cout << endl;
 		}
-
-	}
-	void show() {
 
 	}
 private:
