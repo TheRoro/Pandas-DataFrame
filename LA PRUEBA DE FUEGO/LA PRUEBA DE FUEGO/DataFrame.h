@@ -34,8 +34,8 @@ public:
 
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("peladas.txt");
-		temporal.open("peladas.txt");
+		archivo.open("txtGrande.txt");
+		temporal.open("txtGrande.txt");
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C') {
@@ -128,7 +128,7 @@ public:
 	void Mostrar(int numFil, int numCol) {
 		for (int j = 0; j < numFil; j++) {
 			for (int i = 0; i < numCol; i++) {
-				cout << columns->at(i)->getDataAt_j(j) << "		";
+				cout << columns->at(i)->getDataAt_j(j) << "	";
 			}
 			cout << endl;
 		}
@@ -140,24 +140,16 @@ public:
 		DataFrame df_Filtered = DataFrame();
 	}
 	void sortData(int col) {
-		//DataFrame dfSorted = DataFrame();
-		for (int i = 0; i < 6 - 1 ; i++) {
-			for (int j = 0; j < 5 - i - 1; j++) {
-				if (columns->at(col)->getDataAt_j(j) > columns->at(col)->getDataAt_j(j+1)) {
-					for (int k = 0; k < 6; k++) {
-						string temporal = columns->at(k)->getDataAt_j(j);
-						columns->at(k)->setDataAt_j(j , columns->at(k)->getDataAt_j(j + 1));
-						columns->at(k)->setDataAt_j(j + 1, temporal);
-					}
-				}
-			}
-		}
+		
+		quicksort(columns, 0, numFil - 1, col);
+
+		//quicksort(columns, 0, numFil - 1, col);
 		Mostrar(numFil, numCol);
 	}
 	void exportData() {
 
 		ofstream archivo;
-		archivo.open("peladas.txt");
+		archivo.open("txtGrande.txt");
 
 		for (int j = 0; j < numFil; j++) {
 			for (int i = 0; i < numCol; i++) {
@@ -231,4 +223,41 @@ private:
 		if (x == " ") return true;
 
 	}
+
+	void swapy(vector<Column*>*& v, int x, int y) {
+		for (int k = 0; k < v->size(); k++) {
+			string temporal = columns->at(k)->getDataAt_j(x);
+			columns->at(k)->setDataAt_j(x, columns->at(k)->getDataAt_j(y));
+			columns->at(k)->setDataAt_j(y, temporal);
+		}
+	}
+	void quicksort(vector<Column*>* &cols, int L, int R, int col) {
+		string piv;
+		int i, j, mid;
+		i = L;
+		j = R;
+		mid = L + (R - L) / 2;
+		piv = cols->at(col)->getDataAt_j(mid);
+
+		while (i<R || j>L) {
+			while (cols->at(col)->getDataAt_j(i) < piv)
+				i++;
+			while (cols->at(col)->getDataAt_j(j) > piv)
+				j--;
+
+			if (i <= j) {
+				swapy(cols, i, j);
+				i++;
+				j--;
+			}
+			else {
+				if (i < R)
+					quicksort(cols, i, R, col);
+				if (j > L)
+					quicksort(cols, L, j, col);
+				return;
+			}
+		}
+	}
+
 };

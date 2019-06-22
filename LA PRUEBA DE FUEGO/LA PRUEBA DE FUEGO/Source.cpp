@@ -8,7 +8,7 @@ using namespace std;
 using namespace System;
 
 int main() {	
-	system("mode con: cols=110 lines=30");
+	//system("mode con: cols=110 lines=30");
 	setlocale(LC_ALL, "spanish");
 	system("Color 07");
 
