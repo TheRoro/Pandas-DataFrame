@@ -26,6 +26,13 @@ public:
 	void add(Row r) {
 		rows.push_back(r);
 	}
+	string GetTipo() { return tipo; }
+	int GetSizeIterador(int i) {
+		return rows.at(i).GetSize();
+	}
+	void ErasePosition(int pos) {
+		rows.erase(rows.begin() + pos);
+	}
 private:
 	int FindType(string j) {
 		if ((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)) {

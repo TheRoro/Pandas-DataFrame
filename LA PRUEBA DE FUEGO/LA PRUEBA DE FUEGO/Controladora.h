@@ -14,7 +14,7 @@ public:
 	Controladora() { }
 
 	void menu() {
-
+		string zh;
 		do {
 			cout << "------------------------------PANDAS--------------------------" << endl;
 			cout << "By: Los Papi Pros && Vila" << endl;
@@ -47,7 +47,6 @@ public:
 				int colu;
 				char parametro1, parametro2;
 				int num;
-
 				//PRIMERO SE INGRESA LA COLUMNA A FILTRAR
 				cout << "Ingrese el indice de la columna que desea filtrar: " << endl;
 				cin >> colu;
@@ -64,26 +63,34 @@ public:
 				case 'a':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
+					dataFrame.filterDataMayor(colu, num);
 					break;
 				case 'b':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
+					dataFrame.filterDataMenor(colu, num);
 					break;
 				case 'c':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
+					dataFrame.filterDataigual(colu, num);
 					break;
 				case 'd':
-
+					cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+					cin >> zh;
+					dataFrame.filterDatainicia(colu, zh);
 					break;
 				case 'e':
+					cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
+					cin >> zh;
+					dataFrame.filterDataTermina(colu, zh);
 					break;
 				case 'f':
+					cout << "Ingrese la letra: " << endl;
 					break;
 				case 'g':
 					break;
 				}
-				dataFrame.filterData();
 				break;
 			case 'E':
 				int col;

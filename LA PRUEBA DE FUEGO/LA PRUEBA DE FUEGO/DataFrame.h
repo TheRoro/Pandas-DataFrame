@@ -34,8 +34,8 @@ public:
 
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("txtGrande.txt");
-		temporal.open("txtGrande.txt");
+		archivo.open("peladas.txt"); //Recordar cambiarlo
+		temporal.open("peladas.txt"); //recordar cambiarlo
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C') {
@@ -63,6 +63,9 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
+					if (numFil == 1) {
+						columns->at(i)->StaType(*row);
+					}
 				}
 				else {
 					getline(archivo, linea, ',');
@@ -70,11 +73,10 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
+					if (numFil == 1) {
+						columns->at(i)->StaType(*row);
+					}
 				}
-
-				/*if (numFil == 0) {
-					columns->at(i)->StaType(*row);
-				}*/
 				i++;
 			}
 		}
@@ -104,6 +106,9 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
+					if (numFil == 1) {
+						columns->at(i)->StaType(*row);
+					}
 				}
 				else {
 					getline(archivo, linea, '	');
@@ -111,11 +116,10 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
+					if (numFil == 1) {
+						columns->at(i)->StaType(*row);
+					}
 				}
-
-				/*if (numFil == 0) {
-					columns->at(i)->StaType(*row);
-				}*/
 				i++;
 			}
 
@@ -136,8 +140,137 @@ public:
 	void selectData() {
 
 	}
-	void filterData() {
+	void filterDataMayor(int c , int m) {
+        DataFrame df_Filtered = DataFrame();
+		df_Filtered.columns = this->columns;
+		df_Filtered.numCol = this->numCol;
+		df_Filtered.numFil = this->numFil;
+		for (int j = 0; j < df_Filtered.numFil; j++) {
+			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) <= m) {
+				for (int i = 0; i < df_Filtered.numCol; i++) {
+					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+				}
+			}
+		}
+		cout << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
+					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+			cout << endl;
+		}
+	}
+	void filterDataMenor(int c, int m) {
 		DataFrame df_Filtered = DataFrame();
+		df_Filtered.columns = this->columns;
+		df_Filtered.numCol = this->numCol;
+		df_Filtered.numFil = this->numFil;
+		for (int j = 0; j < df_Filtered.numFil; j++) {
+			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) >= m) {
+				for (int i = 0; i < df_Filtered.numCol; i++) {
+					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+				}
+			}
+		}
+		cout << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
+					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+			cout << endl;
+		}
+	}
+	void filterDataigual(int c, int m) {
+		DataFrame df_Filtered = DataFrame();
+		df_Filtered.columns = this->columns;
+		df_Filtered.numCol = this->numCol;
+		df_Filtered.numFil = this->numFil;
+		for (int j = 0; j < df_Filtered.numFil; j++) {
+			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) != m) {
+				for (int i = 0; i < df_Filtered.numCol; i++) {
+					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+				}
+			}
+		}
+		cout << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
+					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+			cout << endl;
+		}
+	}
+	void filterDatainicia(int colu, string c) {
+		DataFrame df_Filtered = DataFrame();
+		df_Filtered.columns = this->columns;
+		df_Filtered.numCol = this->numCol;
+		df_Filtered.numFil = this->numFil;
+		for (int j = 0; j < df_Filtered.numFil; j++) {
+			if (df_Filtered.columns->at(colu)->getDataAt_j(j)[0] != c[0]) {
+				for (int i = 0; i < df_Filtered.numCol; i++) {
+					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+				}
+			}
+		}
+		cout << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
+					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+			cout << endl;
+		}
+	}
+	void filterDataTermina(int colu, string c) {
+		DataFrame df_Filtered = DataFrame();
+		df_Filtered.columns = this->columns;
+		df_Filtered.numCol = this->numCol;
+		df_Filtered.numFil = this->numFil;
+		for (int j = 0; j < df_Filtered.numFil; j++) {
+			if (df_Filtered.columns->at(colu)->getDataAt_j(j)[df_Filtered.columns->at(colu)->GetSizeIterador(j) - 1] != c[0]) {
+				for (int i = 0; i < df_Filtered.numCol; i++) {
+					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+				}
+			}
+		}
+		cout << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
+					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+			cout << endl;
+		}
+	}
+	void filterDataContenido(int c, int m) {
+		DataFrame df_Filtered = DataFrame();
+		df_Filtered.columns = this->columns;
+		df_Filtered.numCol = this->numCol;
+		df_Filtered.numFil = this->numFil;
+		for (int j = 0; j < df_Filtered.numFil; j++) {
+			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) <= m) {
+				for (int i = 0; i < df_Filtered.numCol; i++) {
+					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+				}
+			}
+		}
+		cout << endl;
+		for (int j = 0; j < numFil; j++) {
+			for (int i = 0; i < numCol; i++) {
+				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
+					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+				}
+			}
+			cout << endl;
+		}
 	}
 	void sortData(int col) {
 		
@@ -223,7 +356,6 @@ private:
 		if (x == " ") return true;
 
 	}
-
 	void swapy(vector<Column*>*& v, int x, int y) {
 		for (int k = 0; k < v->size(); k++) {
 			string temporal = columns->at(k)->getDataAt_j(x);
