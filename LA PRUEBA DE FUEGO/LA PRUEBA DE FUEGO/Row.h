@@ -18,7 +18,9 @@ public:
 	void setInfo(string info) {
 		this->info = info;
 	}
-
+	int GetSize() {
+		return info.size();
+	}
 	string getInfo() { return info; }
 };
 
