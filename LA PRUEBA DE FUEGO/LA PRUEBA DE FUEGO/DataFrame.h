@@ -329,21 +329,6 @@ private:
 		archivo.flush();
 		archivo.close();
 	}
-	int FindType(string j) {
-		if ((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)) {
-			return 0; //retorna 0 si es string
-		}
-		else {
-			double aux = stod(j);
-			int aux2 = int(aux);
-			if (aux != (double)aux2) {
-				return -1; //retorna -1 si es double
-			}
-			else {
-				return 1;//retorna 1 si es int 
-			}
-		}
-	}
 	bool estaVacio() {
 		string x;
 		ifstream archivo("peladas.txt");
@@ -352,6 +337,7 @@ private:
 		if (x == " ") return true;
 
 	}
+
 	void swapy(vector<Column*>*& v, int x, int y) {
 		for (int k = 0; k < v->size(); k++) {
 			string temporal = columns->at(k)->getDataAt_j(x);
