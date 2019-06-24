@@ -124,12 +124,12 @@ public:
 			}
 
 		}
-		Mostrar(numFil, numCol);
+		Mostrar();
 	}
 	void indexData() {
 
 	}
-	void Mostrar(int numFil, int numCol) {
+	void Mostrar() {
 		for (int j = 0; j < numFil; j++) {
 			for (int i = 0; i < numCol; i++) {
 				cout << columns->at(i)->getDataAt_j(j) << "	";
@@ -277,7 +277,7 @@ public:
 		quicksort(columns, 0, numFil - 1, col);
 
 		//quicksort(columns, 0, numFil - 1, col);
-		Mostrar(numFil, numCol);
+		Mostrar();
 	}
 	void exportData() {
 
@@ -293,7 +293,8 @@ public:
 		archivo.close();
 	}
 	void crear(int numFil, int numCol) {
-
+		this->numFil = numFil;
+		this->numCol = numCol;
 		string s = " ";
 		for (int i = 0; i < numCol; i++) {
 
@@ -313,12 +314,7 @@ public:
 		}
 		cout << endl << endl << "SHOWING DATAFRAME 1:" << endl;
 		cout << "////////////////////////////////////////" << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				cout << columns->at(i)->getDataAt_j(j) << " ";
-			}
-			cout << endl;
-		}
+		Mostrar();
 
 	}
 private:

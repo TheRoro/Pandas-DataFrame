@@ -6,12 +6,16 @@ using namespace std;
 class Controladora {
 	char option;
 	string parte; //FILTER
-	vector <DataFrame*>* dataframes;
+	vector <DataFrame*>* DFs;
+	int creados;
 
-	DataFrame dataFrame = DataFrame();
+	/*DataFrame dataFrame = DataFrame();*/
 	bool continuar = true;
 public:
-	Controladora() { }
+	Controladora() { 
+		DFs = new vector<DataFrame*>;
+		creados = 0;
+	}
 
 	void menu() {
 		string zh;
@@ -26,6 +30,7 @@ public:
 			cout << "F. Exportación de datos a archivos planos con diferente formato" << endl;
 			cout << "G. Salir del Programa" << endl;
 			cout << "H. Crear Dataframe desde 0" << endl;
+			cout << "I. Crear Dataframe desde 0" << endl;
 			cin >> option;
 
 			switch (option) {
@@ -35,13 +40,16 @@ public:
 				cout << "C. Coma (CSV) " << endl;
 				cout << "T. Tab  (TSV) " << endl;
 				cin >> sep;
-				dataFrame.importData(sep);
+				
+				DFs->push_back(new DataFrame());
+				DFs->at(creados)->importData(sep);
+				creados++;
 				break;
 			case 'B':
-				dataFrame.indexData();
+				/*dataFrame.indexData();*/
 				break;
 			case 'C':
-				dataFrame.selectData();
+				/*dataFrame.selectData();*/
 				break;
 			case 'D':
 				int colu;
@@ -63,27 +71,27 @@ public:
 				case 'a':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
-					dataFrame.filterDataMayor(colu, num);
+				/*	dataFrame.filterDataMayor(colu, num);*/
 					break;
 				case 'b':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
-					dataFrame.filterDataMenor(colu, num);
+					/*dataFrame.filterDataMenor(colu, num);*/
 					break;
 				case 'c':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
-					dataFrame.filterDataigual(colu, num);
+				/*	dataFrame.filterDataigual(colu, num);*/
 					break;
 				case 'd':
 					cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
 					cin >> zh;
-					dataFrame.filterDatainicia(colu, zh);
+					/*dataFrame.filterDatainicia(colu, zh);*/
 					break;
 				case 'e':
 					cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
 					cin >> zh;
-					dataFrame.filterDataTermina(colu, zh);
+					/*dataFrame.filterDataTermina(colu, zh);*/
 					break;
 				case 'f':
 					cout << "Ingrese la letra: " << endl;
@@ -97,10 +105,10 @@ public:
 				cout << "Seleccione el numero (0-n) de la columna que desea ordenar: " << endl;
 				cin >> col;
 				cout << endl;
-				dataFrame.sortData(col);
+				/*dataFrame.sortData(col);*/
 				break;
 			case 'F':
-				dataFrame.exportData();
+			/*	dataFrame.exportData();*/
 				break;
 			case 'G':
 				continuar = false;
@@ -111,8 +119,19 @@ public:
 				cin >> numCol;
 				cout << "Ingrese el numero de filas: " << endl;
 				cin >> numFil;
-				dataFrame.crear(numFil, numCol);
+				DFs->push_back(new DataFrame());
+				DFs->at(creados)->crear(numFil, numCol);
+				creados++;
+				/*dataFrame.crear(numFil, numCol);*/
 				break;
+			case 'I':
+				int i;
+				
+				cout << "Que data frame desea visualizar";
+				cin >> i;
+				cout << endl;
+				DFs->at(i)->Mostrar();
+				cout << endl;
 			}
 		} while (continuar);
 	}
