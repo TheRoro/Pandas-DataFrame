@@ -127,6 +127,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AVLTree.h" />
     <ClInclude Include="Column.h" />
     <ClInclude Include="DataFrame.h" />
     <ClInclude Include="Row.h" />
