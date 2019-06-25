@@ -17,7 +17,7 @@ using namespace std;
 class DataFrame {
 
 	vector <Column*>* columns;
-	vector <Row*>*	  rows;
+
 	int nc;
 	int nf;
 	int numCol = 1;
@@ -26,7 +26,7 @@ class DataFrame {
 public:
 	DataFrame() {
 		columns = new vector<Column*>;
-		rows = new vector<Row*>;
+		
 		nc = 0;
 		nf = 0;
 	}
@@ -137,9 +137,28 @@ public:
 			cout << endl;
 		}
 	}
-	void selectData() {
+	DataFrame* selectData(vector<int> poscol) {
 
+		DataFrame* dfNuevo = new DataFrame();
+		dfNuevo->numCol = poscol.size();
+		dfNuevo->numFil = numFil;
+		for (int i = 0; i < poscol.size(); i++) {
+			dfNuevo->columns->push_back(columns->at(poscol.at(i)));
+		}
+		return dfNuevo;
 	}
+
+	/*void NuevoFMayor(int columnas, int dato) {
+		DataFrame df_filtrado = DataFrame();
+		df_filtrado.numCol = this->numCol;
+		for (int j = 0; j < numFil; j++) {
+			if (stoi(columns->at(columnas)->getDataAt_j(j)) > dato) {
+				for (int i = 0; i < df_filtrado.numCol; i++) {
+
+				}
+			}
+		}
+	} */
 	void filterDataMayor(int c , int m) {
         DataFrame df_Filtered = DataFrame();
 		df_Filtered.columns = this->columns;
@@ -273,7 +292,6 @@ public:
 		}
 	}
 	void sortData(int col) {
-		cout << numCol << " " << numFil << endl;
 		if (columns->at(col)->GetTipo() == "string")
 		{
 			quicksort(columns, 0, numFil - 1, col); //el cero esta de más?
@@ -286,18 +304,27 @@ public:
 		//quicksort(columns, 0, numFil - 1, col);
 		Mostrar();
 	}
-	void exportData() {
-
-		ofstream archivo;
-		archivo.open("txtGrande.txt");
-
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				archivo << columns->at(i)->getDataAt_j(j) << "	";
+	void exportData(int formato) {
+		ofstream exported;
+		if (formato == 1) { //FORMATO CSV
+			exported.open("exported.csv");
+			for (int j = 0; j < numFil; j++) {
+				for (int i = 0; i < numCol; i++) {
+					exported << columns->at(i)->getDataAt_j(j) << ",";
+				}
+				exported << endl;
 			}
-			archivo << endl;
 		}
-		archivo.close();
+		else { //FORMATO TSV
+			exported.open("exported.tsv");
+			for (int j = 0; j < numFil; j++) {
+				for (int i = 0; i < numCol; i++) {
+					exported << columns->at(i)->getDataAt_j(j) << "	";
+				}
+				exported << endl;
+			}
+		}
+		exported.close();
 	}
 	void crear(int numFil, int numCol) {
 		this->numFil = numFil;
