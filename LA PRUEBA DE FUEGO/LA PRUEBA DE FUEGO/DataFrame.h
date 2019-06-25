@@ -6,6 +6,7 @@
 #include <string>
 #include "Column.h"
 #include "Row.h"
+#include "Controladora.h"
 
 using namespace std;
 
@@ -34,8 +35,8 @@ public:
 
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("peladas.txt"); //Recordar cambiarlo
-		temporal.open("peladas.txt"); //recordar cambiarlo
+		archivo.open("data.txt"); //Recordar cambiarlo
+		temporal.open("data.txt"); //recordar cambiarlo
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C') {
@@ -130,6 +131,9 @@ public:
 
 	}
 	void Mostrar() {
+		
+		cout << endl << endl << "SHOWING DATAFRAME 1:" << endl;
+		cout << "////////////////////////////////////////" << endl;
 		for (int j = 0; j < numFil; j++) {
 			for (int i = 0; i < numCol; i++) {
 				cout << columns->at(i)->getDataAt_j(j) << "	";
@@ -347,8 +351,6 @@ public:
 				columns->at(i)->StaType(*row);
 			}
 		}
-		cout << endl << endl << "SHOWING DATAFRAME 1:" << endl;
-		cout << "////////////////////////////////////////" << endl;
 		Mostrar();
 
 	}
