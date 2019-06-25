@@ -1,3 +1,4 @@
+year,level,code,company,currency,class,feature 1, feature 2, grade
 2017,Level 12,99999,All industries,Dollars (millions),H01,Total income,Financial performance,644159
 2018,Level 39,99999,Ell industries,Dollars (millions),H04,"Sales, government funding, grants and subsidies",Financial performance,567080
 2019,Level 48,99999,Rll industries,Dollars (millions),H05,"Interest, dividends and donations",Financial performance,59317

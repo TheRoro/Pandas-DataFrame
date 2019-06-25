@@ -1,7 +1,6 @@
 #include <iostream>
-#include <locale.h>
+#include <clocale>
 #include "Controladora.h"
-
 
 using namespace std;
 using namespace System;

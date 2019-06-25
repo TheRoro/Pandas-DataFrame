@@ -1,0 +1,25 @@
+year,level,code,company,currency,class,feature 1, feature 2, grade
+2017,Level 12,99999,All industries,Dollars (millions),H01,Total income,Financial performance,644159
+2018,Level 39,99999,Ell industries,Dollars (millions),H04,"Sales, government funding, grants and subsidies",Financial performance,567080
+2019,Level 48,99999,Rll industries,Dollars (millions),H05,"Interest, dividends and donations",Financial performance,59317
+2020,Level 64,99999,TYY industries,Dollars (millions),H07,Non-operating income,Financial performance,17762
+2016,Level 54,99999,GHl industries,Dollars (millions),H08,Total expenditure,Financial performance,560665
+2015,Level 63,99999,WEl industries,Dollars (millions),H09,Interest and donations,Financial performance,33474
+2014,Level 72,99999,WEl industries,Dollars (millions),H10,Indirect taxes,Financial performance,6890
+2013,Level 76,99999,FBl industries,Dollars (millions),H11,Depreciation,Financial performance,18730
+2012,Level 68,99999,ERl industries,Dollars (millions),H12,Salaries and wages paid,Financial performance,99874
+2011,Level 31,99999,FGl industries,Dollars (millions),H13,Redundancy and severance,Financial performance,226
+2010,Level 19,99999,WEl industries,Dollars (millions),H14,Salaries and wages to self employed commission agents,Financial performance,1867
+2009,Level 46,99999,HJl industries,Dollars (millions),H19,Purchases and other operating expenses,Financial performance,391041
+2008,Level 64,99999,XCl industries,Dollars (millions),H20,Non-operating expenses,Financial performance,8789
+2012,Level 83,99999,All industries,Dollars (millions),H21,Opening stocks,Financial performance,56188
+2017,Level 61,99999,ASl industries,Dollars (millions),H22,Closing stocks,Financial performance,59721
+2013,Level 77,99999,AlO industries,Dollars (millions),H23,Surplus before income tax,Financial performance,87027
+2014,Level 56,99999,AYT industries,Dollars (millions),H24,Total assets,Financial position,1968716
+2016,Level 67,99999,A12 industries,Dollars (millions),H25,Current assets,Financial position,565618
+2018,Level 41,99999,A45 industries,Dollars (millions),H26,Fixed tangible assets,Financial position,458928
+2018,Level 43,99999,ANR industries,Dollars (millions),H29,Other assets,Financial position,944170
+2012,Level 15,99999,ASR industries,Dollars (millions),H30,Total equity and liabilities,Financial position,1968717
+2010,Level 58,99999,A78 industries,Dollars (millions),H31,Shareholders funds or owners equity,Financial position,620922
+2010,Level 68,99999,AGV industries,Dollars (millions),H32,Current liabilities,Financial position,750792
+2019,Level 14,99999,8RB industries,Dollars (millions),H33,Other liabilities,Financial position,597003
