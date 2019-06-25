@@ -274,7 +274,7 @@ public:
 	}
 	void sortData(int col) {
 		
-		quicksort(columns, 0, numFil - 1, col);
+		quicksort(columns, 0, numFil - 1, col); //el cero esta de más?
 
 		//quicksort(columns, 0, numFil - 1, col);
 		Mostrar();

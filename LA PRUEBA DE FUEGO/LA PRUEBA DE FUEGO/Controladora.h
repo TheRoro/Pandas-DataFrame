@@ -105,7 +105,7 @@ public:
 				cout << "Seleccione el numero (0-n) de la columna que desea ordenar: " << endl;
 				cin >> col;
 				cout << endl;
-				/*dataFrame.sortData(col);*/
+				DFs->at(0)->sortData(col);
 				break;
 			case 'F':
 			/*	dataFrame.exportData();*/

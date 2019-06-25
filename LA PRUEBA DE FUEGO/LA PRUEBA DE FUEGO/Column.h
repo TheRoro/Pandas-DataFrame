@@ -33,6 +33,13 @@ public:
 	void ErasePosition(int pos) {
 		rows.erase(rows.begin() + pos);
 	}
+	double ConvertirTipoIterador(int i) {
+		if (tipo == "Double") {
+			return stod(rows.at(i).getInfo());
+		}
+		else if (tipo == "Int") { return stoi(rows.at(i).getInfo()); }
+	}
+
 private:
 	int FindType(string j) {
 		if ((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)) {
