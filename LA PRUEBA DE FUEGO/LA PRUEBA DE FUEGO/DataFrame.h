@@ -273,7 +273,7 @@ public:
 		}
 	}
 	void sortData(int col) {
-		
+		cout << numCol << " " << numFil << endl;
 		if (columns->at(col)->GetTipo() == "string")
 		{
 			quicksort(columns, 0, numFil - 1, col); //el cero esta de más?
@@ -317,6 +317,7 @@ public:
 				cin >> s;
 				row->setInfo(s);
 				columns->at(i)->add(*row);
+				columns->at(i)->StaType(*row);
 			}
 		}
 		cout << endl << endl << "SHOWING DATAFRAME 1:" << endl;
@@ -324,6 +325,7 @@ public:
 		Mostrar();
 
 	}
+	
 private:
 	void Limpiar() {
 		string x;

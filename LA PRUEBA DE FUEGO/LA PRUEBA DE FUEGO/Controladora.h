@@ -8,6 +8,7 @@ class Controladora {
 	string parte; //FILTER
 	vector <DataFrame*>* DFs;
 	int creados;
+	int df;
 
 	/*DataFrame dataFrame = DataFrame();*/
 	bool continuar = true;
@@ -30,7 +31,7 @@ public:
 			cout << "F. Exportación de datos a archivos planos con diferente formato" << endl;
 			cout << "G. Salir del Programa" << endl;
 			cout << "H. Crear Dataframe desde 0" << endl;
-			cout << "I. Crear Dataframe desde 0" << endl;
+			cout << "I. Mostrar DataFrame" << endl;
 			cin >> option;
 
 			switch (option) {
@@ -102,10 +103,16 @@ public:
 				break;
 			case 'E':
 				int col;
+
+				cout << "Que número de DataFrame desea editar:" << endl;
+				cin >> df;
+				cout << endl;
 				cout << "Seleccione el numero (0-n) de la columna que desea ordenar: " << endl;
 				cin >> col;
 				cout << endl;
-				DFs->at(0)->sortData(col);
+				DFs->at(df)->Mostrar();
+				cout << endl;
+				DFs->at(df)->sortData(col);
 				break;
 			case 'F':
 			/*	dataFrame.exportData();*/
@@ -122,11 +129,9 @@ public:
 				DFs->push_back(new DataFrame());
 				DFs->at(creados)->crear(numFil, numCol);
 				creados++;
-				/*dataFrame.crear(numFil, numCol);*/
 				break;
 			case 'I':
 				int i;
-				
 				cout << "Que data frame desea visualizar";
 				cin >> i;
 				cout << endl;
