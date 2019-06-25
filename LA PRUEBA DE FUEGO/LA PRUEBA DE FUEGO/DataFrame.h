@@ -35,8 +35,8 @@ public:
 
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("data.txt"); //Recordar cambiarlo
-		temporal.open("data.txt"); //recordar cambiarlo
+		archivo.open("sampleData.txt"); //Recordar cambiarlo
+		temporal.open("sampleData.txt"); //recordar cambiarlo
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C') {
@@ -132,7 +132,7 @@ public:
 	}
 	void Mostrar() {
 		
-		cout << endl << endl << "SHOWING DATAFRAME 1:" << endl;
+		cout << endl << endl << "SHOWING DATAFRAME:" << endl;
 		cout << "////////////////////////////////////////" << endl;
 		for (int j = 0; j < numFil; j++) {
 			for (int i = 0; i < numCol; i++) {

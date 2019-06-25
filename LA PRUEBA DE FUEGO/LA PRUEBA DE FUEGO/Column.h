@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <stdlib.h>
+#include <string>
 #include "Row.h"
 
 using namespace std;
