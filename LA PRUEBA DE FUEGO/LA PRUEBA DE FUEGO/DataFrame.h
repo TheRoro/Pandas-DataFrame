@@ -310,16 +310,19 @@ public:
 	}
 	void exportData(int formato) {
 		ofstream exported;
-		if (formato == 1) { //FORMATO CSV
-			exported.open("exported.csv");
+
+		switch (formato)
+		{
+		case 1:
+			exported.open("exported.csv"); //FORMATO CSV
 			for (int j = 0; j < numFil; j++) {
 				for (int i = 0; i < numCol; i++) {
 					exported << columns->at(i)->getDataAt_j(j) << ",";
 				}
 				exported << endl;
 			}
-		}
-		else { //FORMATO TSV
+			break;
+		case 2:
 			exported.open("exported.tsv");
 			for (int j = 0; j < numFil; j++) {
 				for (int i = 0; i < numCol; i++) {
@@ -327,6 +330,10 @@ public:
 				}
 				exported << endl;
 			}
+			break;
+		default:
+			cout << "wrong output";
+			break;
 		}
 		exported.close();
 	}
