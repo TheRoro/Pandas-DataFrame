@@ -274,7 +274,14 @@ public:
 	}
 	void sortData(int col) {
 		
-		quicksort(columns, 0, numFil - 1, col); //el cero esta de más?
+		if (columns->at(col)->GetTipo() == "string")
+		{
+			quicksort(columns, 0, numFil - 1, col); //el cero esta de más?
+		}
+		else if (columns->at(col)->GetTipo() == "Int") {
+			quicksortInt(columns, 0, numFil - 1, col);
+		}
+		
 
 		//quicksort(columns, 0, numFil - 1, col);
 		Mostrar();
@@ -373,5 +380,40 @@ private:
 			}
 		}
 	}
+	void swapyInt(vector<Column*>*& v, int x, int y) {
+		for (int k = 0; k < v->size(); k++) {
+			string temporal = columns->at(k)->getDataAt_j(x);
+			columns->at(k)->setDataAt_j(x, columns->at(k)->getDataAt_j(y));
+			columns->at(k)->setDataAt_j(y, temporal);
+		}
+	}
+	void quicksortInt(vector<Column*>* &cols, int L, int R, int col) {
+		int piv;
+		int i, j, mid;
+		i = L;
+		j = R;
+		mid = L + (R - L) / 2;
+		piv = stoi(cols->at(col)->getDataAt_j(mid));
 
+		while (i<R || j>L) {
+			while (stoi(cols->at(col)->getDataAt_j(i)) < piv)
+				i++;
+			while (stoi(cols->at(col)->getDataAt_j(j)) > piv)
+				j--;
+
+			if (i <= j) {
+				swapyInt(cols, i, j);
+				//swapy(cols, i, j);
+				i++;
+				j--;
+			}
+			else {
+				if (i < R)
+					quicksortInt(cols, i, R, col);
+				if (j > L)
+					quicksortInt(cols, L, j, col);
+				return;
+			}
+		}
+	}
 };
