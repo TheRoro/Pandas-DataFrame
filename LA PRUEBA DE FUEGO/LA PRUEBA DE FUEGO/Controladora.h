@@ -9,6 +9,11 @@ class Controladora {
 	vector <DataFrame*>* DFs;
 	int creados;
 	int df;
+	int n;
+	int ncol;
+	int x;			
+	int i;
+	vector<int> poscol;
 
 	/*DataFrame dataFrame = DataFrame();*/
 	bool continuar = true;
@@ -50,7 +55,28 @@ public:
 				/*dataFrame.indexData();*/
 				break;
 			case 'C':
-				/*dataFrame.selectData();*/
+				//RETORNAR UN NUEVO DATA FRAME QUE TIENE UNA SELECCION DE COLUMNAS DEL DATA FRAME SELECCIONADO
+				// EL USUARIO SELCCIONA LAS COLUMNAS QUE DESEA QUE PERMANEZCAN,Y SE CREA.
+				
+				cout << "Que data frame desea editar: " << endl;
+				cin >> n;
+				cout << endl;
+				cout << "Mostrando DataFrame seleccionado---------" << endl;
+				DFs->at(n)->Mostrar();
+				cout << endl;
+				
+				cout << "Cuantas columnas desea seleccionar: " << endl;
+				cin >> ncol;
+
+				for (int i = 0; i < ncol; i++) {
+					cin >> x;
+					poscol.push_back(x);
+				}
+				DFs->push_back(DFs->at(n)->selectData(poscol));
+				cout << "Mostrando nuevo DataFrame--------------" << endl;
+				DFs->at(creados)->Mostrar();
+				creados++;
+
 				break;
 			case 'D':
 				int colu;
@@ -110,15 +136,18 @@ public:
 				cout << "Seleccione el numero (0-n) de la columna que desea ordenar: " << endl;
 				cin >> col;
 				cout << endl;
-				DFs->at(df)->Mostrar();
-				cout << endl;
 				DFs->at(df)->sortData(col);
 				break;
 			case 'F':
-			/*	dataFrame.exportData();*/
-				break;
-			case 'G':
-				continuar = false;
+				int i;
+				int formato;
+				cout << "Que DataFrame desea Exportar" << endl;
+				cin >> i;
+				cout << "Ingrese el formato de exportar: " << endl;
+				cout << "1. CSV" << endl;
+				cout << "2. TSV" << endl;
+				cin >> formato;
+				DFs->at(i)->exportData(formato);
 				break;
 			case 'H':
 				int numCol, numFil;
@@ -131,12 +160,16 @@ public:
 				creados++;
 				break;
 			case 'I':
-				int i;
 				cout << "Que data frame desea visualizar";
 				cin >> i;
 				cout << endl;
 				DFs->at(i)->Mostrar();
 				cout << endl;
+				break;
+			case 'G':
+				continuar = false;
+				break;
+			default: continuar = false;
 			}
 		} while (continuar);
 	}
