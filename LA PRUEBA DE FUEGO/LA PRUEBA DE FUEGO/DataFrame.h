@@ -141,6 +141,53 @@ public:
 			cout << endl;
 		}
 	}
+
+	/*void ElegirFiltro() {
+		int dump1, para1;
+		int colm1, colm2;
+		string dump2;
+		char para;
+		do {
+			cout << "Elija el número de columnas que desee ordenar (1 o 2 )" << endl;
+			cin >> dump1;
+		} while (dump1 > 2);
+		cout << "Elija la columna que desee filtrar: " << endl;
+		cin >> colm1;
+		cout << "Ingrese el parametro por el cual desea filtrar: " << endl;
+		cout << "a. Mayor que x" << endl; 
+		cout << "b. Menor que x " << endl;
+		cout << "c. Igual que x " << endl;
+		cout << "d. Inicia con: " << endl;
+		cout << "e. Finaliza con: " << endl;
+		cout << "f. Está contenido en: " << endl;
+		cout << "g. No está contenido en: " << endl;
+		cin >> para;
+		switch (para)
+		{
+		case 'a':
+			if (dump1 == 1) {
+				cout << "Ingrese la columna: " << endl;
+				cin >> colm1;
+				cout << "Ingrese el numero: " << endl;
+				cin >> para1;
+				this->NuevoFilterMayor(colm1, para1);
+			}
+			break;
+		case 'b':
+			break;
+		case 'c':
+			break;
+		case 'd':
+			break;
+		case 'e':
+			break;
+		case 'f':
+			break;
+		case 'g':
+			break;
+		}
+ 
+	}*/
 	DataFrame* selectData(vector<int> poscol) {
 
 		DataFrame* dfNuevo = new DataFrame();
@@ -152,127 +199,290 @@ public:
 		return dfNuevo;
 	}
 
-	/*void NuevoFMayor(int columnas, int dato) {
-		DataFrame df_filtrado = DataFrame();
-		df_filtrado.numCol = this->numCol;
+	DataFrame* NuevoFilterMayor(int columnas, int dato , int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		//df_filtrado.GenerarColumnas(df_filtrado.numCol);
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		//inicializar Rows
 		for (int j = 0; j < numFil; j++) {
 			if (stoi(columns->at(columnas)->getDataAt_j(j)) > dato) {
-				for (int i = 0; i < df_filtrado.numCol; i++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
+				}
+				df_filtrado->numFil++;
+			}
+		}
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
+				}
+				cout << endl;
+			}
+		}
+		return df_filtrado;
+	}
 
-				}
-			}
+	void UnFiltro(int col1) {
+		char El1;
+		DataFrame* p;
+		int num;
+		string zh;
+		cout << "Ingrese los parametro por el cual desea filtrar: " << endl;
+		cout << "a. Mayor que x" << endl;
+		cout << "b. Menor que x " << endl;
+		cout << "c. Igual que x " << endl;
+		cout << "d. Inicia con: " << endl;
+		cout << "e. Finaliza con: " << endl;
+		cout << "f. Está contenido en: " << endl;
+		cout << "g. No está contenido en: " << endl;
+		cin >> El1;
+		switch (El1)
+		{
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterMayor(col1, num, 1);
+			break;
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterMenor(col1, num, 1);
+			break;
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterIgual(col1, num, 1);
+			break;
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p = NuevoFilterInicia(col1, zh, 1);
+			break;
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
+			cin >> zh;
+			p = NuevoFilterTermina(col1, zh, 1);
+			break;
+		case 'f':
+			break;
+		case 'g':
+			break;
+
 		}
-	} */
-	void filterDataMayor(int c , int m) {
-        DataFrame df_Filtered = DataFrame();
-		df_Filtered.columns = this->columns;
-		df_Filtered.numCol = this->numCol;
-		df_Filtered.numFil = this->numFil;
-		for (int j = 0; j < df_Filtered.numFil; j++) {
-			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) <= m) {
-				for (int i = 0; i < df_Filtered.numCol; i++) {
-					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+	}
+	void DobleFiltro(int col1, int col2) {
+		char El1, El2;
+		DataFrame* p;
+		int num;
+		string zh;
+		cout << "Ingrese los parametro por el cual desea filtrar(escriba los 2 separados por un espacio): " << endl;
+		cout << "a. Mayor que x" << endl;
+		cout << "b. Menor que x " << endl;
+		cout << "c. Igual que x " << endl;
+		cout << "d. Inicia con: " << endl;
+		cout << "e. Finaliza con: " << endl;
+		cout << "f. Está contenido en: " << endl;
+		cout << "g. No está contenido en: " << endl;
+		cin >> El1 >> El2;
+		switch (El1)
+		{
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterMayor(col1, num, 0);
+			break;
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterMenor(col1, num, 0);
+			break;
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterIgual(col1, num, 0);
+			break;
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p = NuevoFilterInicia(col1, zh, 0);
+			break;
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
+			cin >> zh;
+			p = NuevoFilterTermina(col1, zh, 0);
+			break;
+		case 'f':
+			break;
+		case 'g':
+			break;
+		  
+		}
+		switch (El2)
+		{
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->NuevoFilterMayor(col2, num, 1);
+			break;
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->NuevoFilterMenor(col2, num, 1);
+			break;
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->NuevoFilterIgual(col2, num, 1);
+			break;
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p ->NuevoFilterInicia(col2, zh, 1);
+			break;
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p ->NuevoFilterTermina(col2, zh, 1);
+			break;
+		case 'f':
+			break;
+		case 'g':
+			break;
+
+		}
+	}
+private:
+	DataFrame* NuevoFilterMenor(int columnas, int dato , int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		//df_filtrado.GenerarColumnas(df_filtrado.numCol);
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		//inicializar Rows
+		for (int j = 0; j < numFil; j++) {
+			if (stoi(columns->at(columnas)->getDataAt_j(j)) < dato) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
 				}
+				df_filtrado->numFil++;
 			}
 		}
 		cout << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
-					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
 				}
+				cout << endl;
 			}
-			cout << endl;
 		}
+		return df_filtrado;
 	}
-	void filterDataMenor(int c, int m) {
-		DataFrame df_Filtered = DataFrame();
-		df_Filtered.columns = this->columns;
-		df_Filtered.numCol = this->numCol;
-		df_Filtered.numFil = this->numFil;
-		for (int j = 0; j < df_Filtered.numFil; j++) {
-			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) >= m) {
-				for (int i = 0; i < df_Filtered.numCol; i++) {
-					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+
+	DataFrame* NuevoFilterIgual(int columnas, int dato, int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		for (int j = 0; j < numFil; j++) {
+			if (stoi(columns->at(columnas)->getDataAt_j(j)) == dato) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
 				}
+				df_filtrado->numFil++;
 			}
 		}
 		cout << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
-					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
 				}
+				cout << endl;
 			}
-			cout << endl;
 		}
+		return df_filtrado;
 	}
-	void filterDataigual(int c, int m) {
-		DataFrame df_Filtered = DataFrame();
-		df_Filtered.columns = this->columns;
-		df_Filtered.numCol = this->numCol;
-		df_Filtered.numFil = this->numFil;
-		for (int j = 0; j < df_Filtered.numFil; j++) {
-			if (stoi(df_Filtered.columns->at(c)->getDataAt_j(j)) != m) {
-				for (int i = 0; i < df_Filtered.numCol; i++) {
-					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+	
+	DataFrame* NuevoFilterInicia(int columnas, string dato, int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		for (int j = 0; j < numFil; j++) {
+			if (columns->at(columnas)->getDataAt_j(j)[0] == dato[0]) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
 				}
+				df_filtrado->numFil++;
 			}
 		}
 		cout << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
-					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
 				}
+				cout << endl;
 			}
-			cout << endl;
 		}
+		return df_filtrado;
 	}
-	void filterDatainicia(int colu, string c) {
-		DataFrame df_Filtered = DataFrame();
-		df_Filtered.columns = this->columns;
-		df_Filtered.numCol = this->numCol;
-		df_Filtered.numFil = this->numFil;
-		for (int j = 0; j < df_Filtered.numFil; j++) {
-			if (df_Filtered.columns->at(colu)->getDataAt_j(j)[0] != c[0]) {
-				for (int i = 0; i < df_Filtered.numCol; i++) {
-					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
+
+	DataFrame* NuevoFilterTermina(int columnas, string dato, int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		for (int j = 0; j < numFil; j++) {
+			if (columns->at(columnas)->getDataAt_j(j)[columns->at(columnas)->GetSizeIterador(j) - 1] == dato[0]) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
 				}
+				df_filtrado->numFil++;
 			}
 		}
 		cout << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
-					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
 				}
+				cout << endl;
 			}
-			cout << endl;
 		}
+		return df_filtrado;
 	}
-	void filterDataTermina(int colu, string c) {
-		DataFrame df_Filtered = DataFrame();
-		df_Filtered.columns = this->columns;
-		df_Filtered.numCol = this->numCol;
-		df_Filtered.numFil = this->numFil;
-		for (int j = 0; j < df_Filtered.numFil; j++) {
-			if (df_Filtered.columns->at(colu)->getDataAt_j(j)[df_Filtered.columns->at(colu)->GetSizeIterador(j) - 1] != c[0]) {
-				for (int i = 0; i < df_Filtered.numCol; i++) {
-					df_Filtered.columns->at(i)->setDataAt_j(j, " ");
-				}
-			}
-		}
-		cout << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				if (df_Filtered.columns->at(i)->getDataAt_j(j) != " ") {
-					cout << df_Filtered.columns->at(i)->getDataAt_j(j) << "		";
-				}
-			}
-			cout << endl;
-		}
-	}
+	
+public:
 	void filterDataContenido(int c, int m) {
 		DataFrame df_Filtered = DataFrame();
 		df_Filtered.columns = this->columns;

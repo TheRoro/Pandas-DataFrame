@@ -14,12 +14,13 @@ class Controladora {
 	int x;			
 	int i;
 	vector<int> poscol;
-
+	DataFrame*gt;
 	/*DataFrame dataFrame = DataFrame();*/
 	bool continuar = true;
 public:
 	Controladora() { 
 		DFs = new vector<DataFrame*>;
+		
 		creados = 0;
 	}
 
@@ -79,9 +80,12 @@ public:
 
 				break;
 			case 'D':
-				int colu;
+				int dump;
+				int col1, col2;
+				/*int colu;
 				char parametro1, parametro2;
 				int num;
+				DFs->at(0)->DobleFiltro(0, 1);
 				//PRIMERO SE INGRESA LA COLUMNA A FILTRAR
 				cout << "Ingrese el indice de la columna que desea filtrar: " << endl;
 				cin >> colu;
@@ -98,34 +102,50 @@ public:
 				case 'a':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
-				/*	dataFrame.filterDataMayor(colu, num);*/
+					cout << endl;
+					 gt = DFs->at(0)->NuevoFilterMayor(colu, num, 1);
 					break;
 				case 'b':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
-					/*dataFrame.filterDataMenor(colu, num);*/
+					DFs->at(0)->NuevoFilterMenor(colu, num, 1);
 					break;
 				case 'c':
 					cout << "Ingrese el numero: " << endl;
 					cin >> num;
-				/*	dataFrame.filterDataigual(colu, num);*/
+					DFs->at(0)->NuevoFilterIgual(colu, num , 1);
 					break;
 				case 'd':
 					cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
 					cin >> zh;
-					/*dataFrame.filterDatainicia(colu, zh);*/
+					DFs->at(0)->NuevoFilterInicia(colu, zh , 1);
 					break;
 				case 'e':
 					cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
 					cin >> zh;
-					/*dataFrame.filterDataTermina(colu, zh);*/
+					DFs->at(0)->NuevoFilterTermina(colu, zh , 1);
 					break;
 				case 'f':
 					cout << "Ingrese la letra: " << endl;
 					break;
 				case 'g':
 					break;
+				}*/
+				cout << "Ingrese el número de columnas que desee filtrar" << endl;
+				cin >> dump;
+				if (dump == 1) {
+					cout << "Ingrese el indice de la columna que desea filtrar: " << endl;
+					cin >> col1;
+					DFs->at(0)->UnFiltro(col1);
 				}
+				else if (dump == 2) {
+					cout << "Ingrese el indice de la primera columna que desea filtrar: " << endl;
+					cin >> col1;
+					cout << "Ingrese el indice de la segunda columna que desea filtrar: " << endl;
+					cin >> col2;
+					DFs->at(0)->DobleFiltro(col1, col2);
+				}
+
 				break;
 			case 'E':
 				int col;
