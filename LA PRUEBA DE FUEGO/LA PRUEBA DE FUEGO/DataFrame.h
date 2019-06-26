@@ -142,52 +142,6 @@ public:
 		}
 	}
 
-	/*void ElegirFiltro() {
-		int dump1, para1;
-		int colm1, colm2;
-		string dump2;
-		char para;
-		do {
-			cout << "Elija el número de columnas que desee ordenar (1 o 2 )" << endl;
-			cin >> dump1;
-		} while (dump1 > 2);
-		cout << "Elija la columna que desee filtrar: " << endl;
-		cin >> colm1;
-		cout << "Ingrese el parametro por el cual desea filtrar: " << endl;
-		cout << "a. Mayor que x" << endl; 
-		cout << "b. Menor que x " << endl;
-		cout << "c. Igual que x " << endl;
-		cout << "d. Inicia con: " << endl;
-		cout << "e. Finaliza con: " << endl;
-		cout << "f. Está contenido en: " << endl;
-		cout << "g. No está contenido en: " << endl;
-		cin >> para;
-		switch (para)
-		{
-		case 'a':
-			if (dump1 == 1) {
-				cout << "Ingrese la columna: " << endl;
-				cin >> colm1;
-				cout << "Ingrese el numero: " << endl;
-				cin >> para1;
-				this->NuevoFilterMayor(colm1, para1);
-			}
-			break;
-		case 'b':
-			break;
-		case 'c':
-			break;
-		case 'd':
-			break;
-		case 'e':
-			break;
-		case 'f':
-			break;
-		case 'g':
-			break;
-		}
- 
-	}*/
 	DataFrame* selectData(vector<int> poscol) {
 
 		DataFrame* dfNuevo = new DataFrame();
@@ -197,37 +151,6 @@ public:
 			dfNuevo->columns->push_back(columns->at(poscol.at(i)));
 		}
 		return dfNuevo;
-	}
-
-	DataFrame* NuevoFilterMayor(int columnas, int dato , int mostrar) {
-		DataFrame* df_filtrado = new DataFrame();
-		df_filtrado->numCol = this->numCol;
-		df_filtrado->numFil = 0;
-		//df_filtrado.GenerarColumnas(df_filtrado.numCol);
-		for (int o = 0; o < df_filtrado->numCol; o++) {
-			Column* columnna = new Column();
-			df_filtrado->columns->push_back(columnna);
-		}
-		//inicializar Rows
-		for (int j = 0; j < numFil; j++) {
-			if (stoi(columns->at(columnas)->getDataAt_j(j)) > dato) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					Row* row = new Row();
-					row->setInfo(columns->at(i)->getDataAt_j(j));
-					df_filtrado->columns->at(i)->add(*row);
-				}
-				df_filtrado->numFil++;
-			}
-		}
-		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
-		}
-		return df_filtrado;
 	}
 
 	void UnFiltro(int col1) {
@@ -272,8 +195,14 @@ public:
 			p = NuevoFilterTermina(col1, zh, 1);
 			break;
 		case 'f':
+			cout << "Ingrese el digito o la letra que quieres que este contenida" << endl;
+			cin >> zh;
+			p = NuevoFilterEsta(col1, zh, 1);
 			break;
 		case 'g':
+			cout << "Ingrese el digito o la letra que NO quieres que este contenida" << endl;
+			cin >> zh;
+			p = NuevoFilterNoEsta(col1, zh, 1);
 			break;
 
 		}
@@ -320,8 +249,14 @@ public:
 			p = NuevoFilterTermina(col1, zh, 0);
 			break;
 		case 'f':
+			cout << "Ingrese el digito o la letra que quieres que este contenida" << endl;
+			cin >> zh;
+			p = NuevoFilterEsta(col1, zh, 0);
 			break;
 		case 'g':
+			cout << "Ingrese el digito o la letra que NO quieres que este contenida" << endl;
+			cin >> zh;
+			p = NuevoFilterNoEsta(col1, zh, 0);
 			break;
 		  
 		}
@@ -353,13 +288,55 @@ public:
 			p ->NuevoFilterTermina(col2, zh, 1);
 			break;
 		case 'f':
+			cout << "Ingrese el digito o la letra que quieres que este contenida" << endl;
+			cin >> zh;
+			p->NuevoFilterEsta(col2, zh, 1);
 			break;
 		case 'g':
+			cout << "Ingrese el digito o la letra que NO quieres que este contenida" << endl;
+			cin >> zh;
+			p->NuevoFilterNoEsta(col2, zh, 1);
 			break;
 
 		}
 	}
 private:
+	bool IsInside(string a, string comp) {
+		char compara = comp[0];
+		return a.find(compara) != std::string::npos;
+	}
+
+	DataFrame* NuevoFilterMayor(int columnas, int dato, int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		//df_filtrado.GenerarColumnas(df_filtrado.numCol);
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		//inicializar Rows
+		for (int j = 0; j < numFil; j++) {
+			if (stoi(columns->at(columnas)->getDataAt_j(j)) > dato) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
+				}
+				df_filtrado->numFil++;
+			}
+		}
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
+				}
+				cout << endl;
+			}
+		}
+		return df_filtrado;
+	}
+
 	DataFrame* NuevoFilterMenor(int columnas, int dato , int mostrar) {
 		DataFrame* df_filtrado = new DataFrame();
 		df_filtrado->numCol = this->numCol;
@@ -482,6 +459,66 @@ private:
 		return df_filtrado;
 	}
 	
+	DataFrame* NuevoFilterEsta(int columnas, string dato, int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		for (int j = 0; j < numFil; j++) {
+			if (IsInside(columns->at(columnas)->getDataAt_j(j), dato)) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
+				}
+				df_filtrado->numFil++;
+			}
+		}
+		cout << endl;
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
+				}
+				cout << endl;
+			}
+		}
+		return df_filtrado;
+	}
+
+	DataFrame* NuevoFilterNoEsta(int columnas, string dato, int mostrar) {
+		DataFrame* df_filtrado = new DataFrame();
+		df_filtrado->numCol = this->numCol;
+		df_filtrado->numFil = 0;
+		for (int o = 0; o < df_filtrado->numCol; o++) {
+			Column* columnna = new Column();
+			df_filtrado->columns->push_back(columnna);
+		}
+		for (int j = 0; j < numFil; j++) {
+			if (!IsInside(columns->at(columnas)->getDataAt_j(j), dato)) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					Row* row = new Row();
+					row->setInfo(columns->at(i)->getDataAt_j(j));
+					df_filtrado->columns->at(i)->add(*row);
+				}
+				df_filtrado->numFil++;
+			}
+		}
+		cout << endl;
+		if (mostrar == 1) {
+			for (int j = 0; j < df_filtrado->numFil; j++) {
+				for (int i = 0; i < df_filtrado->numCol; i++) {
+					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
+				}
+				cout << endl;
+			}
+		}
+		return df_filtrado;
+	}
+
 public:
 	void filterDataContenido(int c, int m) {
 		DataFrame df_Filtered = DataFrame();
