@@ -43,7 +43,7 @@ public:
 
 private:
 	int FindType(string j) {
-		if ((j[0] >= 65 && j[0] <= 90) || (j[0] >= 97 && j[0] <= 122)) {
+		if ((j[0] >= 32 && j[0] <= 47) || (j[0] >= 58)) {
 			return 0; //retorna 0 si es string
 		}
 		else {
