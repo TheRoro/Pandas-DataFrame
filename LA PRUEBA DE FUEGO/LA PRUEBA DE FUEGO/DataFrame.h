@@ -17,6 +17,7 @@ using namespace std;
 //STRING - STRING   - STRING - CHAR - INT  - INT
 
 
+
 class DataFrame {
 
 	vector <Column*>* columns;
