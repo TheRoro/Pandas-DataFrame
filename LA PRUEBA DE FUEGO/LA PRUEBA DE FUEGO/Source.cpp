@@ -5,9 +5,8 @@
 using namespace std;
 using namespace System;
 
-int main() {	
-
-	system("mode 145"); //CONSOLE SIZE
+int main() {
+	//system(screen); //CONSOLE SIZE
 	setlocale(LC_ALL, "spanish"); //TILDES Y Ñ
 	system("Color 0A"); //COLOR DE LA CONSOLA
 
