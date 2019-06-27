@@ -42,8 +42,8 @@ public:
 
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("sample.txt"); //Recordar cambiarlo
-		temporal.open("sample.txt"); //recordar cambiarlo
+		archivo.open("sampleData.txt"); //Recordar cambiarlo
+		temporal.open("sampleData.txt"); //recordar cambiarlo
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C' || sep == 'c') {
@@ -195,60 +195,7 @@ public:
 		}
 		return dfNuevo;
 	}
-	void UnFiltro(int col1) {
-		char El1;
-		DataFrame* p;
-		int num;
-		string zh;
-		cout << "Ingrese los parametro por el cual desea filtrar: " << endl;
-		cout << "a. Mayor que x" << endl;
-		cout << "b. Menor que x " << endl;
-		cout << "c. Igual que x " << endl;
-		cout << "d. Inicia con: " << endl;
-		cout << "e. Finaliza con: " << endl;
-		cout << "f. Está contenido en: " << endl;
-		cout << "g. No está contenido en: " << endl;
-		cin >> El1;
-		switch (El1)
-		{
-		case 'a':
-			cout << "Ingrese el numero: " << endl;
-			cin >> num;
-			p = NuevoFilterMayor(col1, num, 1);
-			break;
-		case 'b':
-			cout << "Ingrese el numero: " << endl;
-			cin >> num;
-			p = NuevoFilterMenor(col1, num, 1);
-			break;
-		case 'c':
-			cout << "Ingrese el numero: " << endl;
-			cin >> num;
-			p = NuevoFilterIgual(col1, num, 1);
-			break;
-		case 'd':
-			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
-			cin >> zh;
-			p = NuevoFilterInicia(col1, zh, 1);
-			break;
-		case 'e':
-			cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
-			cin >> zh;
-			p = NuevoFilterTermina(col1, zh, 1);
-			break;
-		case 'f':
-			cout << "Ingrese el digito o la letra que quieres que este contenida" << endl;
-			cin >> zh;
-			p = NuevoFilterEsta(col1, zh, 1);
-			break;
-		case 'g':
-			cout << "Ingrese el digito o la letra que NO quieres que este contenida" << endl;
-			cin >> zh;
-			p = NuevoFilterNoEsta(col1, zh, 1);
-			break;
 
-		}
-	}
 	void DobleFiltro(int col1, int col2) {
 		char El1, El2;
 		DataFrame* p;
@@ -452,6 +399,37 @@ public:
 	bool getVisualization() {
 		return shortened;
 	}
+
+	DataFrame* GetMayor(int columnas, int dato, int mostrar) {
+		return NuevoFilterMayor(columnas, dato, mostrar);
+	}
+	DataFrame* GetMenor(int columnas, int dato, int mostrar) {
+		return NuevoFilterMenor(columnas, dato, mostrar);
+	}
+	DataFrame* GetIgual(int columnas, int dato, int mostrar) {
+		return NuevoFilterIgual(columnas, dato, mostrar);
+	}
+	DataFrame* GetInicia(int columnas, string dato, int mostrar) {
+		return NuevoFilterInicia(columnas, dato, mostrar);
+	}
+	DataFrame* GetTermina(int columnas, string dato, int mostrar) {
+		return NuevoFilterTermina(columnas, dato, mostrar);
+	}
+	DataFrame* GetContiene(int columnas, string dato, int mostrar) {
+		return NuevoFilterEsta(columnas, dato, mostrar);
+	}
+	DataFrame* GetNoContiene(int columnas, string dato, int mostrar) {
+		return NuevoFilterNoEsta(columnas, dato, mostrar);
+	}
+
+	void OtroMostrar(DataFrame* df) {
+		for (int j = 0; j < df->numFil; j++) {
+			for (int i = 0; i < df->numCol; i++) {
+				cout << df->columns->at(i)->getDataAt_j(j) << " ";
+			}
+			cout << endl;
+		}
+	}
 private:
 	void Limpiar() {
 		string x;
@@ -477,7 +455,8 @@ private:
 		return a.find(compara) != std::string::npos;
 	}
 	//by vilaron
-	DataFrame* NuevoFilterMayor(int columnas, int dato, int mostrar) {
+
+	DataFrame* NuevoFilterMayor(int columnas, long  dato, int mostrar) {
 		DataFrame* df_filtrado = new DataFrame();
 		df_filtrado->numCol = this->numCol;
 		df_filtrado->numFil = 0;
@@ -488,7 +467,7 @@ private:
 		}
 		//inicializar Rows
 		for (int j = 0; j < numFil; j++) {
-			if (stoi(columns->at(columnas)->getDataAt_j(j)) > dato) {
+			if (atoi(columns->at(columnas)->getDataAt_j(j).c_str()) > dato) {
 				for (int i = 0; i < df_filtrado->numCol; i++) {
 					Row* row = new Row();
 					row->setInfo(columns->at(i)->getDataAt_j(j));
@@ -498,12 +477,7 @@ private:
 			}
 		}
 		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
+			OtroMostrar(df_filtrado);
 		}
 		return df_filtrado;
 	}
@@ -529,12 +503,7 @@ private:
 		}
 		cout << endl;
 		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
+			OtroMostrar(df_filtrado);
 		}
 		return df_filtrado;
 	}
@@ -558,12 +527,7 @@ private:
 		}
 		cout << endl;
 		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
+			OtroMostrar(df_filtrado);
 		}
 		return df_filtrado;
 	}
@@ -587,12 +551,7 @@ private:
 		}
 		cout << endl;
 		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
+			OtroMostrar(df_filtrado);
 		}
 		return df_filtrado;
 	}
@@ -616,12 +575,7 @@ private:
 		}
 		cout << endl;
 		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
+			OtroMostrar(df_filtrado);
 		}
 		return df_filtrado;
 	}
@@ -645,12 +599,7 @@ private:
 		}
 		cout << endl;
 		if (mostrar == 1) {
-			for (int j = 0; j < df_filtrado->numFil; j++) {
-				for (int i = 0; i < df_filtrado->numCol; i++) {
-					cout << df_filtrado->columns->at(i)->getDataAt_j(j) << " ";
-				}
-				cout << endl;
-			}
+			OtroMostrar(df_filtrado);
 		}
 		return df_filtrado;
 	}
