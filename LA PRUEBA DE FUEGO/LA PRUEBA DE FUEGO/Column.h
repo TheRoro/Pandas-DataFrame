@@ -9,6 +9,7 @@ using namespace std;
 class Column {
 
 	vector <Row> rows;
+	string nombre;
 	string tipo;
 
 public:
@@ -16,6 +17,8 @@ public:
 		tipo = " ";
 		string nombre;
 	}
+	void setNombre(string nombre) { this->nombre = nombre; }
+	string getNombre() { return nombre; }
 	string getDataAt_j(int j) {
 		
 		return rows.at(j).getInfo();
@@ -33,12 +36,6 @@ public:
 	}
 	void ErasePosition(int pos) {
 		rows.erase(rows.begin() + pos);
-	}
-	double ConvertirTipoIterador(int i) {
-		if (tipo == "Double") {
-			return stod(rows.at(i).getInfo());
-		}
-		else if (tipo == "Int") { return stoi(rows.at(i).getInfo()); }
 	}
 
 private:

@@ -6,7 +6,7 @@
 using namespace std;
 template <typename T, typename R = T>
 
-class Tree {
+class Arbolito {
 	struct Node {
 		T e;
 		Node* left;
@@ -84,8 +84,8 @@ class Tree {
 		n->updateH();
 	}
 public:
-	Tree(function <R(T)> key = [](T a) {return a; }) : root(nullptr), length(0), key(key) {}
-	~Tree() { destroy(root); }
+	Arbolito(function <R(T)> key = [](T a) {return a; }) : root(nullptr), length(0), key(key) {}
+	~Arbolito() { destroy(root); }
 	int Height() {
 		return Node::height(root);
 	}

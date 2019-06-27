@@ -1,4 +1,5 @@
 #pragma once
+#include "AVLTree.h"
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
@@ -7,6 +8,7 @@
 #include "Column.h"
 #include "Row.h"
 #include "Controladora.h"
+
 
 using namespace std;
 
@@ -31,6 +33,9 @@ public:
 		nc = 0;
 		nf = 0;
 	}
+	~DataFrame() {
+		delete columns;
+	}
 	void importData(char sep) {
 
 		ifstream archivo;
@@ -39,7 +44,7 @@ public:
 		temporal.open("sample.txt"); //recordar cambiarlo
 		string linea;
 		getline(temporal, linea);
-		if (sep == 'C') {
+		if (sep == 'C' || sep == 'c') {
 			//FOR PARA SABER LA CANTIDAD DE COLUMNAS
 			for (int i = 0; i < linea.size(); i++) {
 				if (linea[i] == ',') numCol++;
@@ -50,6 +55,21 @@ public:
 				columna = new Column();
 				columns->push_back(columna);
 			}
+			temporal.close();
+			temporal.open("sample.txt");
+			//asignar nombre
+			for (int i = 0; i < numCol; i++) {
+				if (i == numCol - 1) {
+					getline(temporal, linea, '\n');
+					columns->at(i)->setNombre(linea);		
+				}
+				else {
+					getline(temporal, linea, ',');
+					columns->at(i)->setNombre(linea);
+				}
+				
+			}
+			temporal.close();
 			int i = 0;
 			numFil = 1;
 			linea = " ";
@@ -64,7 +84,7 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
-					if (numFil == 1) {
+					if (numFil == 2) {
 						columns->at(i)->StaType(*row);
 					}
 				}
@@ -74,14 +94,14 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
-					if (numFil == 1) {
+					if (numFil == 2) {
 						columns->at(i)->StaType(*row);
 					}
 				}
 				i++;
 			}
 		}
-		else if (sep == 'T') {
+		else if (sep == 'T' || sep == 't') {
 			//FOR PARA SABER LA CANTIDAD DE COLUMNAS
 			for (int i = 0; i < linea.size(); i++) {
 				if (linea[i] == '	') numCol++;
@@ -107,7 +127,7 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
-					if (numFil == 1) {
+					if (numFil == 2) {
 						columns->at(i)->StaType(*row);
 					}
 				}
@@ -117,7 +137,7 @@ public:
 					row = new Row();
 					row->setInfo(linea);
 					columns->at(i)->add(*row);
-					if (numFil == 1) {
+					if (numFil == 2) {
 						columns->at(i)->StaType(*row);
 					}
 				}
@@ -125,10 +145,18 @@ public:
 			}
 
 		}
+		cout << columns->at(8)->GetTipo();
 		Mostrar();
 	}
-	void indexData() {
-
+	void indexData(vector<int> poscol) {
+		Arbolito<string>* ColumnTree = new Arbolito<string>();
+		for (int i = 0; i < poscol.size(); i++) {
+			for (int j = 0; j < numFil; j++) {
+				ColumnTree->Add(columns->at(poscol.at(i))->getDataAt_j(j));
+			}
+			
+		}
+		
 	}
 	void Mostrar() {
 		
@@ -136,7 +164,9 @@ public:
 		cout << "////////////////////////////////////////" << endl;
 		for (int j = 0; j < numFil; j++) {
 			for (int i = 0; i < numCol; i++) {
-				cout << columns->at(i)->getDataAt_j(j) << "	";
+				if (columns->at(i)->getDataAt_j(j).size() >= 8) {
+					cout << columns->at(i)->getDataAt_j(j)[0] << columns->at(i)->getDataAt_j(j)[1] << columns->at(i)->getDataAt_j(j)[2] << "..." << "		";
+				}else cout << columns->at(i)->getDataAt_j(j) << "		";
 			}
 			cout << endl;
 		}
@@ -320,18 +350,25 @@ public:
 			cout << endl;
 		}
 	}
-	void sortData(int col) {
-		if (columns->at(col)->GetTipo() == "string")
-		{
-			quicksort(columns, 0, numFil - 1, col); //el cero esta de más?
+	DataFrame* sortData(int col) {
+		DataFrame* dfNuevo = new DataFrame();
+		dfNuevo->numCol = numCol;
+		dfNuevo->numFil = numFil;
+		for (int i = 0; i < numCol; i++) {
+			dfNuevo->columns->push_back(columns->at(i));
 		}
-		else if (columns->at(col)->GetTipo() == "Int") {
-			quicksortInt(columns, 0, numFil - 1, col);
-		}
-		
 
-		//quicksort(columns, 0, numFil - 1, col);
-		Mostrar();
+		if (dfNuevo->columns->at(col)->GetTipo() == "string")
+		{
+			quicksort(dfNuevo->columns, 1, numFil - 1, col); 
+		}
+		else if (dfNuevo->columns->at(col)->GetTipo() == "Int") {
+			quicksortInt(dfNuevo->columns, 1, numFil - 1, col);
+		}
+		else if (dfNuevo->columns->at(col)->GetTipo() == "Double") {
+			quicksortDouble(dfNuevo->columns, 1, numFil - 1, col);
+		}
+		return dfNuevo;
 	}
 	void exportData(int formato) {
 		ofstream exported;
@@ -342,7 +379,10 @@ public:
 			exported.open("exported.csv"); //FORMATO CSV
 			for (int j = 0; j < numFil; j++) {
 				for (int i = 0; i < numCol; i++) {
-					exported << columns->at(i)->getDataAt_j(j) << ",";
+					if (i != numCol - 1) {
+						exported << columns->at(i)->getDataAt_j(j) << ",";
+					}
+					else exported << columns->at(i)->getDataAt_j(j) << "";
 				}
 				exported << endl;
 			}
@@ -351,7 +391,10 @@ public:
 			exported.open("exported.tsv");
 			for (int j = 0; j < numFil; j++) {
 				for (int i = 0; i < numCol; i++) {
-					exported << columns->at(i)->getDataAt_j(j) << "	";
+					if (i != numCol - 1) {
+						exported << columns->at(i)->getDataAt_j(j) << "	";
+					}
+					else exported << columns->at(i)->getDataAt_j(j) << "";
 				}
 				exported << endl;
 			}
@@ -411,6 +454,7 @@ private:
 		char compara = comp[0];
 		return a.find(compara) != std::string::npos;
 	}
+	//by vilaron
 	DataFrame* NuevoFilterMayor(int columnas, int dato, int mostrar) {
 		DataFrame* df_filtrado = new DataFrame();
 		df_filtrado->numCol = this->numCol;
@@ -652,13 +696,6 @@ private:
 			}
 		}
 	}
-	void swapyInt(vector<Column*>*& v, int x, int y) {
-		for (int k = 0; k < v->size(); k++) {
-			string temporal = columns->at(k)->getDataAt_j(x);
-			columns->at(k)->setDataAt_j(x, columns->at(k)->getDataAt_j(y));
-			columns->at(k)->setDataAt_j(y, temporal);
-		}
-	}
 	void quicksortInt(vector<Column*>* &cols, int L, int R, int col) {
 		int piv;
 		int i, j, mid;
@@ -674,7 +711,7 @@ private:
 				j--;
 
 			if (i <= j) {
-				swapyInt(cols, i, j);
+				swapy(cols, i, j);
 				//swapy(cols, i, j);
 				i++;
 				j--;
@@ -688,4 +725,34 @@ private:
 			}
 		}
 	}
+	void quicksortDouble(vector<Column*>* &cols, int L, int R, int col) {
+		int piv;
+		int i, j, mid;
+		i = L;
+		j = R;
+		mid = L + (R - L) / 2;
+		piv = stod(cols->at(col)->getDataAt_j(mid));
+
+		while (i<R || j>L) {
+			while (stod(cols->at(col)->getDataAt_j(i)) < piv)
+				i++;
+			while (stod(cols->at(col)->getDataAt_j(j)) > piv)
+				j--;
+
+			if (i <= j) {
+				swapy(cols, i, j);
+				//swapy(cols, i, j);
+				i++;
+				j--;
+			}
+			else {
+				if (i < R)
+					quicksortInt(cols, i, R, col);
+				if (j > L)
+					quicksortInt(cols, L, j, col);
+				return;
+			}
+		}
+	}
+
 };
