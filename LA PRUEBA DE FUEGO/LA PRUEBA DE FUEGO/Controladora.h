@@ -1,21 +1,19 @@
 #pragma once
 #include "DataFrame.h"
+#include "AVLTree.h"
+
 
 using namespace std;
 
 class Controladora {
 	char option;
-	string parte; //FILTER
 	vector <DataFrame*>* DFs;
 	int creados;
 	int df;
-	int n;
 	int ncol;
 	int x;			
-	int i;
 	vector<int> poscol;
-	DataFrame*gt;
-	/*DataFrame dataFrame = DataFrame();*/
+
 	bool continuar = true;
 public:
 	Controladora() { 
@@ -35,13 +33,16 @@ public:
 			cout << "D. Flitrado de datos por columas" << endl;
 			cout << "E. Ordenamiento de datos por columnas" << endl;
 			cout << "F. Exportación de datos a archivos planos con diferente formato" << endl;
-			cout << "G. Salir del Programa" << endl;
+			cout << "G. Eliminar DataFrame" << endl;
 			cout << "H. Crear Dataframe desde 0" << endl;
 			cout << "I. Mostrar DataFrame" << endl;
+			cout << "X. Salir del Programa" << endl;
 			cin >> option;
 
 			switch (option) {
+			case 'a':
 			case 'A':
+				//import
 				char sep;
 				cout << "Separador: " << endl;
 				cout << "C. Coma (CSV) " << endl;
@@ -52,102 +53,72 @@ public:
 				DFs->at(creados)->importData(sep);
 				creados++;
 				break;
+			case 'b':
 			case 'B':
-				/*dataFrame.indexData();*/
+				cout << "Ingrese el DataFrame que desea indexar: " << endl;
+				cin >> df;
+				cout << endl;
+				cout << "Cuantas columnas desea indexar :" << endl;
+				cin >> ncol;
+				for (int i = 0; i < ncol; i++) {
+					cout << "Ingrese la " << i + 1 << " columna deseada (empieza en 0)";
+					cin >> x;
+					poscol.push_back(x);
+				}
+
 				break;
+			case 'c':
 			case 'C':
-				//RETORNAR UN NUEVO DATA FRAME QUE TIENE UNA SELECCION DE COLUMNAS DEL DATA FRAME SELECCIONADO
-				// EL USUARIO SELCCIONA LAS COLUMNAS QUE DESEA QUE PERMANEZCAN,Y SE CREA.
+				//select
 				
 				cout << "Que data frame desea editar: " << endl;
-				cin >> n;
+				cin >> df;
 				cout << endl;
 				cout << "Mostrando DataFrame seleccionado---------" << endl;
-				DFs->at(n)->Mostrar();
+				DFs->at(df)->Mostrar();
 				cout << endl;
 				
 				cout << "Cuantas columnas desea seleccionar: " << endl;
 				cin >> ncol;
 
 				for (int i = 0; i < ncol; i++) {
+					cout << "Ingrese la " << i + 1 << " columna deseada (empieza en 0)";
 					cin >> x;
 					poscol.push_back(x);
 				}
-				DFs->push_back(DFs->at(n)->selectData(poscol));
-				cout << "Mostrando nuevo DataFrame--------------" << endl;
-				DFs->at(creados)->Mostrar();
+				DFs->push_back(DFs->at(df)->selectData(poscol));
+				cout << "Dataframe creado satisfactoriamente" << endl;
 				creados++;
+				poscol.clear();
 
 				break;
+			case 'd':
 			case 'D':
+				//filtrado
 				int dump;
 				int col1, col2;
-				/*int colu;
-				char parametro1, parametro2;
-				int num;
-				DFs->at(0)->DobleFiltro(0, 1);
-				//PRIMERO SE INGRESA LA COLUMNA A FILTRAR
-				cout << "Ingrese el indice de la columna que desea filtrar: " << endl;
-				cin >> colu;
-				cout << "Ingrese el parametro por el cual desea filtrar: " << endl;
-				cout << "a. Mayor que x" << endl;
-				cout << "b. Menor que x " << endl;
-				cout << "c. Igual que x " << endl;
-				cout << "d. Inicia con: " << endl;
-				cout << "e. Finaliza con: " << endl;
-				cout << "f. Está contenido en: " << endl;
-				cout << "g. No está contenido en: " << endl;
-				cin >> parametro1;
-				switch (parametro1){
-				case 'a':
-					cout << "Ingrese el numero: " << endl;
-					cin >> num;
-					cout << endl;
-					 gt = DFs->at(0)->NuevoFilterMayor(colu, num, 1);
-					break;
-				case 'b':
-					cout << "Ingrese el numero: " << endl;
-					cin >> num;
-					DFs->at(0)->NuevoFilterMenor(colu, num, 1);
-					break;
-				case 'c':
-					cout << "Ingrese el numero: " << endl;
-					cin >> num;
-					DFs->at(0)->NuevoFilterIgual(colu, num , 1);
-					break;
-				case 'd':
-					cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
-					cin >> zh;
-					DFs->at(0)->NuevoFilterInicia(colu, zh , 1);
-					break;
-				case 'e':
-					cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
-					cin >> zh;
-					DFs->at(0)->NuevoFilterTermina(colu, zh , 1);
-					break;
-				case 'f':
-					cout << "Ingrese la letra: " << endl;
-					break;
-				case 'g':
-					break;
-				}*/
+				cout << "Ingrese el data frame que desea editar: " << endl;
+				cin >> df;
 				cout << "Ingrese el número de columnas que desee filtrar" << endl;
 				cin >> dump;
 				if (dump == 1) {
 					cout << "Ingrese el indice de la columna que desea filtrar: " << endl;
 					cin >> col1;
-					DFs->at(0)->UnFiltro(col1);
+					DFs->at(df)->UnFiltro(col1);
 				}
 				else if (dump == 2) {
 					cout << "Ingrese el indice de la primera columna que desea filtrar: " << endl;
 					cin >> col1;
 					cout << "Ingrese el indice de la segunda columna que desea filtrar: " << endl;
 					cin >> col2;
-					DFs->at(0)->DobleFiltro(col1, col2);
+					DFs->at(df)->DobleFiltro(col1, col2);
 				}
+				creados++;
 
 				break;
+			case 'e':
 			case 'E':
+				//ordena
 				int col;
 
 				cout << "Que número de DataFrame desea editar:" << endl;
@@ -156,20 +127,30 @@ public:
 				cout << "Seleccione el numero (0-n) de la columna que desea ordenar: " << endl;
 				cin >> col;
 				cout << endl;
-				DFs->at(df)->sortData(col);
+				DFs->push_back(DFs->at(df)->sortData(col));
+				creados++;
 				break;
+			case 'f':
 			case 'F':
-				int i;
+				//export
 				int formato;
 				cout << "Que DataFrame desea Exportar" << endl;
-				cin >> i;
+				cin >> df;
 				cout << "Ingrese el formato de exportar: " << endl;
 				cout << "1. CSV" << endl;
 				cout << "2. TSV" << endl;
 				cin >> formato;
-				DFs->at(i)->exportData(formato);
+				DFs->at(df)->exportData(formato);
 				break;
+			case 'g':
+			case 'G':
+				cout << "Que DataFrame desea eliminar: " << endl;
+				cin >> df;
+				
+				cout << DFs->size() << endl;
+			case 'h':
 			case 'H':
+				//desde 0
 				int numCol, numFil;
 				cout << "Ingrese el numero de columnas: " << endl;
 				cin >> numCol;
@@ -179,17 +160,19 @@ public:
 				DFs->at(creados)->crear(numFil, numCol);
 				creados++;
 				break;
+			case 'i':
 			case 'I':
 				cout << "Que data frame desea visualizar";
-				cin >> i;
+				cin >> df;
 				cout << endl;
-				DFs->at(i)->Mostrar();
+				DFs->at(df)->Mostrar();
 				cout << endl;
 				break;
-			case 'G':
+			case 'x': 
+			case 'X':
 				continuar = false;
 				break;
-			default: continuar = false;
+			default: cout << "Ingrese tecla nuevamente" << endl;
 			}
 		} while (continuar);
 	}
