@@ -434,17 +434,13 @@ public:
 			case 'F':
 				//export
 				int formato;
-				do {
 					cout << "Que DataFrame desea Exportar" << endl;
 					cin >> df;
-				} while (df >= creados);
-
-				do {
 					cout << "Ingrese el formato de exportar: " << endl;
-					cout << "C. Coma (CSV) " << endl;
-					cout << "T. Tab  (TSV) " << endl;
+					cout << "1. Coma (CSV) " << endl;
+					cout << "2. Tab  (TSV) " << endl;
 					cin >> formato;
-				} while (formato != 'C' && formato != 'c' && formato != 'T' && formato != 't');
+
 
 				DFs->at(df)->exportData(formato);
 				break;
