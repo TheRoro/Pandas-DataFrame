@@ -195,7 +195,6 @@ public:
 		}
 		return dfNuevo;
 	}
-
 	void DobleFiltro(int col1, int col2) {
 		char El1, El2;
 		DataFrame* p;
