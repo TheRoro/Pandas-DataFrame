@@ -42,8 +42,8 @@ public:
 
 		ifstream archivo;
 		ifstream temporal;
-		archivo.open("sampleData.txt"); //Recordar cambiarlo
-		temporal.open("sampleData.txt"); //recordar cambiarlo
+		archivo.open("sample.txt"); //Recordar cambiarlo
+		temporal.open("sample.txt"); //recordar cambiarlo
 		string linea;
 		getline(temporal, linea);
 		if (sep == 'C' || sep == 'c') {
@@ -492,7 +492,7 @@ private:
 		}
 		//inicializar Rows
 		for (int j = 0; j < numFil; j++) {
-			if (stoi(columns->at(columnas)->getDataAt_j(j)) < dato) {
+			if (atoi(columns->at(columnas)->getDataAt_j(j).c_str()) < dato) {
 				for (int i = 0; i < df_filtrado->numCol; i++) {
 					Row* row = new Row();
 					row->setInfo(columns->at(i)->getDataAt_j(j));
@@ -516,7 +516,7 @@ private:
 			df_filtrado->columns->push_back(columnna);
 		}
 		for (int j = 0; j < numFil; j++) {
-			if (stoi(columns->at(columnas)->getDataAt_j(j)) == dato) {
+			if (atoi(columns->at(columnas)->getDataAt_j(j).c_str()) == dato) {
 				for (int i = 0; i < df_filtrado->numCol; i++) {
 					Row* row = new Row();
 					row->setInfo(columns->at(i)->getDataAt_j(j));
