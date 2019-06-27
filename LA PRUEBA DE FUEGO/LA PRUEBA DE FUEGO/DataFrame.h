@@ -20,6 +20,7 @@ using namespace std;
 class DataFrame {
 
 	vector <Column*>* columns;
+	bool shortened = true; //PUNTOS .... DEL MOSTRAR
 
 	int nc;
 	int nf;
@@ -154,21 +155,33 @@ public:
 			for (int j = 0; j < numFil; j++) {
 				ColumnTree->Add(columns->at(poscol.at(i))->getDataAt_j(j));
 			}
-			
 		}
-		
+		cout << "Indexado realizado satisfactoriamente :)" << endl;
 	}
 	void Mostrar() {
 		
 		cout << endl << endl << "SHOWING DATAFRAME:" << endl;
 		cout << "////////////////////////////////////////" << endl;
-		for (int j = 0; j < numFil; j++) {
-			for (int i = 0; i < numCol; i++) {
-				if (columns->at(i)->getDataAt_j(j).size() >= 8) {
-					cout << columns->at(i)->getDataAt_j(j)[0] << columns->at(i)->getDataAt_j(j)[1] << columns->at(i)->getDataAt_j(j)[2] << "..." << "		";
-				}else cout << columns->at(i)->getDataAt_j(j) << "		";
+
+		//MUESTRA EL CONTENIDO CON LOS .. O SIN ELLOS
+		if (shortened) {
+			for (int j = 0; j < numFil; j++) {
+				for (int i = 0; i < numCol; i++) {
+					if (columns->at(i)->getDataAt_j(j).size() >= 8) {
+						cout << columns->at(i)->getDataAt_j(j)[0] << columns->at(i)->getDataAt_j(j)[1] << columns->at(i)->getDataAt_j(j)[2] << "..." << "		";
+					}
+					else cout << columns->at(i)->getDataAt_j(j) << "		";
+				}
+				cout << endl;
 			}
-			cout << endl;
+		}
+		else {
+			for (int j = 0; j < numFil; j++) {
+				for (int i = 0; i < numCol; i++) {
+					cout << columns->at(i)->getDataAt_j(j) << "	";
+				}
+				cout << endl;
+			}
 		}
 	}
 	DataFrame* selectData(vector<int> poscol) {
@@ -429,7 +442,15 @@ public:
 		Mostrar();
 
 	}
-	
+	int getLength() {
+		return columns->size();
+	}
+	void setVisualization(bool shortened) {
+		this->shortened = shortened;
+	}
+	bool getVisualization() {
+		return shortened;
+	}
 private:
 	void Limpiar() {
 		string x;
@@ -712,7 +733,6 @@ private:
 
 			if (i <= j) {
 				swapy(cols, i, j);
-				//swapy(cols, i, j);
 				i++;
 				j--;
 			}
@@ -741,7 +761,6 @@ private:
 
 			if (i <= j) {
 				swapy(cols, i, j);
-				//swapy(cols, i, j);
 				i++;
 				j--;
 			}
