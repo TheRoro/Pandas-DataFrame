@@ -23,6 +23,267 @@ public:
 		creados = 0;
 	}
 
+	/*	void DobleFiltro(int col1, int col2) {
+		char El1, El2;
+		DataFrame* p;
+		int num;
+		string zh;
+		cout << "Ingrese los parametro por el cual desea filtrar(escriba los 2 separados por un espacio): " << endl;
+		cout << "a. Mayor que x" << endl;
+		cout << "b. Menor que x " << endl;
+		cout << "c. Igual que x " << endl;
+		cout << "d. Inicia con: " << endl;
+		cout << "e. Finaliza con: " << endl;
+		cout << "f. Está contenido en: " << endl;
+		cout << "g. No está contenido en: " << endl;
+		cin >> El1 >> El2;
+		switch (El1)
+		{
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterMayor(col1, num, 0);
+			break;
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterMenor(col1, num, 0);
+			break;
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = NuevoFilterIgual(col1, num, 0);
+			break;
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p = NuevoFilterInicia(col1, zh, 0);
+			break;
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual quieres que termine: " << endl;
+			cin >> zh;
+			p = NuevoFilterTermina(col1, zh, 0);
+			break;
+		case 'f':
+			cout << "Ingrese el digito o la letra que quieres que este contenida" << endl;
+			cin >> zh;
+			p = NuevoFilterEsta(col1, zh, 0);
+			break;
+		case 'g':
+			cout << "Ingrese el digito o la letra que NO quieres que este contenida" << endl;
+			cin >> zh;
+			p = NuevoFilterNoEsta(col1, zh, 0);
+			break;
+		  
+		}
+		switch (El2)
+		{
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->NuevoFilterMayor(col2, num, 1);
+			break;
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->NuevoFilterMenor(col2, num, 1);
+			break;
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->NuevoFilterIgual(col2, num, 1);
+			break;
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p ->NuevoFilterInicia(col2, zh, 1);
+			break;
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> zh;
+			p ->NuevoFilterTermina(col2, zh, 1);
+			break;
+		case 'f':
+			cout << "Ingrese el digito o la letra que quieres que este contenida" << endl;
+			cin >> zh;
+			p->NuevoFilterEsta(col2, zh, 1);
+			break;
+		case 'g':
+			cout << "Ingrese el digito o la letra que NO quieres que este contenida" << endl;
+			cin >> zh;
+			p->NuevoFilterNoEsta(col2, zh, 1);
+			break;
+
+		}
+	}*/
+
+	void UnFiltroDF( int dfr ,  int colo1) {
+		char El1;
+		DataFrame* p;
+		int num;
+		string hz;
+		cout << "Ingrese los parametro por el cual desea filtrar: " << endl;
+		cout << "a. Mayor que x" << endl;
+		cout << "b. Menor que x " << endl;
+		cout << "c. Igual que x " << endl;
+		cout << "d. Inicia con: " << endl;
+		cout << "e. Finaliza con: " << endl;
+		cout << "f. Está contenido en: " << endl;
+		cout << "g. No está contenido en: " << endl;
+		cin >> El1;
+		switch (El1)
+		{
+		case 'A':
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = DFs->at(dfr)->GetMayor(colo1, num, 1);
+			break;
+		case 'B':
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = DFs->at(dfr)->GetMenor(colo1, num, 1);
+			break;
+		case 'C':
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = DFs->at(dfr)->GetIgual(colo1, num, 1);
+			break;
+		case 'D':
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetInicia(colo1, hz, 1);
+			break;
+		case 'E':
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual NO quieres que empieze: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetTermina(colo1, hz, 1);
+			break;
+		case 'F':
+		case 'f':
+			cout << "Ingrese el numero o letra con el cual quieres que esté conternida: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetContiene(colo1, hz, 1);
+			break;
+		case 'G':
+		case 'g':
+			cout << "Ingrese el numero o letra con el cual NO quieres que esté conternida: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetNoContiene(colo1, hz, 1);
+			break;
+		}
+	}
+
+	void DobleFiltro(int dfr, int colo1, int colo2) {
+		char El1, El2;
+		DataFrame* p;
+		int num;
+		string hz;
+		cout << "Ingrese los parametro por el cual desea filtrar(escriba los 2 separados por un espacio): " << endl;
+		cout << "a. Mayor que x" << endl;
+		cout << "b. Menor que x " << endl;
+		cout << "c. Igual que x " << endl;
+		cout << "d. Inicia con: " << endl;
+		cout << "e. Finaliza con: " << endl;
+		cout << "f. Está contenido en: " << endl;
+		cout << "g. No está contenido en: " << endl;
+		cin >> El1 >> El2;
+		switch (El1)
+		{
+		case 'A':
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = DFs->at(dfr)->GetMayor(colo1, num, 0);
+			break;
+		case 'B':
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = DFs->at(dfr)->GetMenor(colo1, num, 0);
+			break;
+		case 'C':
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p = DFs->at(dfr)->GetIgual(colo1, num, 0);
+			break;
+		case 'D':
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetInicia(colo1, hz, 0);
+			break;
+		case 'E':
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual NO quieres que empieze: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetTermina(colo1, hz, 0);
+			break;
+		case 'F':
+		case 'f':
+			cout << "Ingrese el numero o letra con el cual quieres que esté conternida: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetContiene(colo1, hz, 0);
+			break;
+		case 'G':
+		case 'g':
+			cout << "Ingrese el numero o letra con el cual NO quieres que esté conternida: " << endl;
+			cin >> hz;
+			p = DFs->at(dfr)->GetNoContiene(colo1, hz, 0);
+			break;
+		}
+
+		switch (El2)
+		{
+		case 'A':
+		case 'a':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->GetMayor(colo2, num, 1);
+			break;
+		case 'B':
+		case 'b':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->GetMenor(colo2, num, 1);
+			break;
+		case 'C':
+		case 'c':
+			cout << "Ingrese el numero: " << endl;
+			cin >> num;
+			p->GetIgual(colo2, num, 1);
+			break;
+		case 'D':
+		case 'd':
+			cout << "Ingrese el numero o letra con el cual quieres que empieze: " << endl;
+			cin >> hz;
+			p->GetInicia(colo2, hz, 1);
+			break;
+		case 'E':
+		case 'e':
+			cout << "Ingrese el numero o letra con el cual NO quieres que empieze: " << endl;
+			cin >> hz;
+			p->GetTermina(colo2, hz, 1);
+			break;
+		case 'F':
+		case 'f':
+			cout << "Ingrese el numero o letra con el cual quieres que esté conternida: " << endl;
+			cin >> hz;
+			p->GetContiene(colo2, hz, 1);
+			break;
+		case 'G':
+		case 'g':
+			cout << "Ingrese el numero o letra con el cual NO quieres que esté conternida: " << endl;
+			cin >> hz;
+			p->GetNoContiene(colo2, hz, 1);
+			break;
+		}
+	}
 	void menu() {
 		string zh;
 		do {
@@ -110,7 +371,9 @@ public:
 			case 'd':
 			case 'D':
 				//filtrado
-				int dump;
+				DataFrame* p;
+				char El1, El2;
+				int dump , num;
 				int col1, col2;
 				do {
 					cout << "Que data frame desea editar: " << endl;
@@ -128,11 +391,14 @@ public:
 						cin >> col1;
 					} while (col1 >= DFs->at(df)->getLength());
 					
-					DFs->at(df)->UnFiltro(col1);
+					//DFs->at(df)->UnFiltro(col1);
+					
+					UnFiltroDF(df, col1);
+					
 				}
 				else if (dump == 2) {
 					do {
-						cout << "Ingrese el indice de la columna que desea filtrar: " << endl;
+						cout << "Ingrese el indice de la primera columna que desea filtrar: " << endl;
 						cin >> col1;
 					} while (col1 >= DFs->at(df)->getLength());
 
@@ -141,7 +407,8 @@ public:
 						cin >> col2;
 					} while (col2 >= DFs->at(df)->getLength());
 
-					DFs->at(df)->DobleFiltro(col1, col2);
+					//DFs->at(df)->DobleFiltro(col1, col2);
+					DobleFiltro(df, col1, col2);
 				}
 				creados++;
 
